@@ -2,4 +2,8 @@
 
 ## Redux
 
-- redux, react-redux, redux-logger, redux-thunk
+- redux, react-redux, redux-logger, redux-thunk, redux-actions
+
+## 기타
+
+- immer, styled-components, axios,
