@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-
 // compo
 import Template from '../components/Template';
 import Search from '../components/Search';
@@ -19,5 +18,5 @@ const Home = ({ articles }) => {
 			))}
 		</Template>
 	);
-
+};
 export default Home;
