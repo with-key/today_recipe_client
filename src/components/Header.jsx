@@ -43,7 +43,7 @@ const Container = styled.header`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	border: 1px solid red;
+	background-color: #fff;
 	width: 100%;
 	height: 80px;
 	position: fixed;

@@ -15,6 +15,8 @@ const Template = ({ children }) => {
 	);
 };
 
-const Container = styled.section``;
+const Container = styled.section`
+	/* border: 1px solid red; */
+`;
 const Section = styled.section``;
 export default Template;
