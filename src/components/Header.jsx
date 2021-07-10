@@ -8,34 +8,56 @@ import { userCreators } from '../modules/user';
 import { useDispatch } from 'react-redux';
 
 // elem
-import { Button, Flex } from '../elem';
+import { Logo, Button, Flex } from '../elem';
 
-const Header = () => {
+const Header = (props) => {
+	console.log(props);
 	const dispatch = useDispatch();
-	const is_login = useSelector(state => state.user.is_login);
+	const is_login = useSelector((state) => state.user.is_login);
 
-	if(is_login){
+	if (is_login) {
 		return (
 			<Container>
-				<div>로고</div>
+				<div>
+					<img src='%PUBLIC_URL%/logo.svg' alt='logo' />
+				</div>
 				<Flex gap='10px;'>
 					<Button primary>내 정보</Button>
-					<Button primary onClick={() => {
-						dispatch(userCreators.logOutDB())
-					}}>로그아웃</Button>
+					<Button
+						primary
+						onClick={() => {
+							dispatch(userCreators.logOutDB());
+						}}
+					>
+						로그아웃
+					</Button>
 				</Flex>
 			</Container>
 		);
-	} 
-		return (
-			<Container>
-				<div>로고</div>
-				<Flex gap='10px;'>
-					<Button primary onClick={()=>{history.push('/login')}}>로그인</Button>
-					<Button primary onClick={()=>{history.push('/signup')}}>회원가입</Button>
-				</Flex>
-			</Container>
-		);
+	}
+	return (
+		<Container>
+			<Logo history={history} />
+			<Flex gap='10px;'>
+				<Button
+					primary
+					onClick={() => {
+						history.push('/login');
+					}}
+				>
+					로그인
+				</Button>
+				<Button
+					primary
+					onClick={() => {
+						history.push('/signup');
+					}}
+				>
+					회원가입
+				</Button>
+			</Flex>
+		</Container>
+	);
 };
 
 const Container = styled.header`
