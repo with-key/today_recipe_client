@@ -7,6 +7,7 @@ import Login from '../page/Login';
 import SignUp from '../page/SignUp';
 
 import Article from '../page/Article';
+import ArticleWrite from '../page/ArticleWrite';
 
 export default function Router() {
 	return (
@@ -16,6 +17,7 @@ export default function Router() {
 				<Route path='/article/:id' component={Article} exact />
 				<Route path='/login' component={Login} exact />
 				<Route path='/signup' component={SignUp} exact />
+				<Route path='/add_article' component={ArticleWrite} exact />
 			</Switch>
 		</>
 	);
