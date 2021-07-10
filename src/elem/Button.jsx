@@ -28,18 +28,19 @@ const BtnBx = styled.button`
 			: `width: ${props.width}`};
 
 	${(props) =>
-		props.primary
-			? css`
-					background-color: #ff6b6b;
-					color: #fff;
-					&:hover {
-						opacity: 80%;
-					}
-			  `
-			: ''}
+		props.primary &&
+		css`
+			background-color: #ff6b6b;
+			color: #fff;
+			&:hover {
+				opacity: 80%;
+			}
+		`}
 	border: none;
 	padding: 10px 20px;
 	border-radius: 8px;
 	cursor: pointer;
+	font-weight: 700;
+	font-size: 14px;
 `;
 export default Button;
