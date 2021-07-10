@@ -22,7 +22,7 @@ const HomeContainer = () => {
 		};
 		fetchInfo();
 	}, []);
-	return <Home articles={articles} />;
+	return <Home articles={articles}  />;
 };
 
 export default HomeContainer;
