@@ -4,12 +4,19 @@ import { useSelector } from 'react-redux';
 import { Row, Button } from '../elem';
 
 const List = ({ history }) => {
-	const articles = useSelector((store) => store.article.articles);
+	const articles = useSelector((store) => store.article.list);
+	console.log(articles);
 	return (
 		<Container>
 			<Title>
 				<H1>엄선한 오늘의 레시피!</H1>
-				<Button primary large>
+				<Button
+					primary
+					large
+					_onClick={() => {
+						history.push('/add_article');
+					}}
+				>
 					레시피 추가
 				</Button>
 			</Title>

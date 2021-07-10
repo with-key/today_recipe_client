@@ -8,7 +8,7 @@ import Footer from './Footer';
 const Template = ({ children }) => {
 	return (
 		<Container>
-			{/* <Header /> */}
+			<Header />
 			<Section>{children}</Section>
 			{/* <Footer /> */}
 		</Container>

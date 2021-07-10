@@ -59,9 +59,10 @@ export const __loadAarticleGetId =
 export default handleActions(
 	{
 		[LOAD]: (state, action) => {
+			console.log(action);
 			return {
 				...state,
-				articles: action.payload.articles,
+				list: action.payload.articles,
 			};
 		},
 		[LOAD_ID]: (state, action) => {

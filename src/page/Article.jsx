@@ -58,7 +58,7 @@ const Article = ({ history, match }) => {
 						<Info>
 							<Flex between>
 								<Text fs='18px' fw='500' color='#333'>
-									{article.user.userId}
+									{/* {article.user.userId} */}
 								</Text>
 								<Text fs='18px' fw='500' color='gray'>
 									{article.createdAt}
@@ -79,7 +79,7 @@ const Article = ({ history, match }) => {
 							<Info>
 								<Flex between>
 									<Text fs='18px' fw='500' color='#333'>
-										{article.user.userId}
+										{/* {article.user.userId} */}
 									</Text>
 									<Text fs='18px' fw='500' color='gray'>
 										{article.createdAt}
