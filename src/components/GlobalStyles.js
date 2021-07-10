@@ -15,10 +15,13 @@ const GlobalStyles = createGlobalStyle`
         font-size:82.5%;
         margin : 0;
         padding: 0;
+        
     }
     body{
         font-family:--apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        padding : 90px 24px 0px 24px;
+        padding-top : 90px;
+        background-color:#F8F8F8;
+        
     }
 `;
 

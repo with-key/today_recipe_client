@@ -1,7 +1,8 @@
 import React from 'react';
+import Template from '../components/Template';
 
 const Article = () => {
-	return <div>Article</div>;
+	return <Template>Article</Template>;
 };
 
 export default Article;
