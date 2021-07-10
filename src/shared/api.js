@@ -16,5 +16,11 @@ export const apis = {
 	login: () => api.post('/posts'),
 	signup: (id, nick, pw, pwcheck) =>
 		api.post('/posts', { id: id, nick: nick, pw: pw, pwcheck: pwcheck }),
-	// 계속해서 증가시켜나갈 예정
+	addComment: (comment) => api.post('/comments', comment),
+	comments: (id) =>
+		api.get('/comments/', {
+			params: {
+				postId: id,
+			},
+		}),
 };
