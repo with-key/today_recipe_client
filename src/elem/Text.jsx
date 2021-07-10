@@ -1,38 +1,19 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 
-import styled from 'styled-components';
+const Text = ({ children, ...rest }) => {
+	return <TextBx {...rest}>{children}</TextBx>;
+};
 
-const Text = (props) => {
-    const {children,size,bold,color,margin} = props;
-
-    const styles = {
-        size: size,
-        bold: bold,
-        margin: margin,
-        color: color,
-    }
-
-    return (
-        <React.Fragment>
-            <Font {...styles}>{children}</Font>
-        </React.Fragment>
-    )
-}
-
-Text.defaultProps = {
-    children: null,
-    size: '16px',
-    bold: false,
-    color: '#000000',
-    margin: false,
-}
-
-const Font = styled.p`
-    font-size: ${(props) => props.size};
-    font-weight: ${(props) => (props.bold? '600' : '400')};
-    color: ${(props) => props.color};
-    margin: ${(props) => props.margin};
+const TextBx = styled.div`
+	${(props) =>
+		props.mg &&
+		css`
+			margin: ${props.mg};
+		`};
+	font-size: ${(props) => props.fs};
+	font-weight: ${(props) => props.fw};
+	color: ${(props) => props.color};
+	line-height: ${(props) => props.lh};
 `;
-
 export default Text;
-

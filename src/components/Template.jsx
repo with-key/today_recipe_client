@@ -8,15 +8,19 @@ import Footer from './Footer';
 const Template = ({ children }) => {
 	return (
 		<Container>
-			{/* <Header /> */}
+			<Header />
 			<Section>{children}</Section>
-			<Footer />
+			{/* <Footer /> */}
 		</Container>
 	);
 };
 
-const Container = styled.section`
-	/* border: 1px solid red; */
+const Container = styled.section``;
+const Section = styled.section`
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
-const Section = styled.section``;
 export default Template;
