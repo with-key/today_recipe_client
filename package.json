@@ -6,6 +6,7 @@
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^11.2.7",
 		"@testing-library/user-event": "^12.8.3",
+		"aws-sdk": "^2.943.0",
 		"axios": "^0.21.1",
 		"connected-react-router": "^6.9.1",
 		"history": "4.10.1",
