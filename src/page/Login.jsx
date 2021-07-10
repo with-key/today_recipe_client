@@ -2,8 +2,10 @@ import React from 'react';
 
 import { useDispatch } from 'react-redux';
 import { userCreators } from '../modules/user';
+import {apis} from '../shared/api';
 
 const Login = (props) => {
+    apis.login(res=>console.log(res))
     const dispatch = useDispatch();
 
     const [id,setId] = React.useState("");

@@ -20,6 +20,5 @@ const rootReducer = combineReducers({
 
 const middleware = [thunk.withExtraArgument({ history }), logger]; // 썽크함수에서 { history } 쓰려면 반드시 필요함
 const store = createStore(rootReducer, applyMiddleware(...middleware)); // 스토어
-console.log(store.getState()); // 리듀서가 잘 연결됐는지 확인용 (지워도 됩니다)
 
 export default store;

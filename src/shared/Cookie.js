@@ -5,4 +5,10 @@ const setCookie = (name, value, exp=5) => {
     document.cookie = `${name}=${value}; expires=${date.toUTCString()}`
 }
 
-export {setCookie}
+const deleteCookie = (name) => {
+    let date = new Date('2020-01-01').toUTCString();
+
+    document.cookie = name+"=; expires="+date;
+}
+
+export {setCookie,deleteCookie}
