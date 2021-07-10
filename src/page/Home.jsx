@@ -27,15 +27,15 @@ const Home = ({ history }) => {
 		fetchInfo();
 	}, []);
 
-	if (!articles) {
-		return <div>로딩중....</div>;
-	}
+	// if (!articles) {
+	// 	return <div>로딩중....</div>;
+	// }
 
 	return (
 		<Template>
 			<Container>
 				<Search />
-				<List articles={articles} history={history} />
+				{/* <List articles={articles} history={history} /> */}
 			</Container>
 		</Template>
 	);
