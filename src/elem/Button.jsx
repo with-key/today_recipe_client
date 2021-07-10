@@ -2,7 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Button = ({ children, ...rest }) => {
-	return <BtnBx {...rest}>{children}</BtnBx>;
+	return (
+		<BtnBx {...rest} onClick={rest._onClick}>
+			{children}
+		</BtnBx>
+	);
 };
 
 Button.defaultProps = {

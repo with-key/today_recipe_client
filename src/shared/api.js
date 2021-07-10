@@ -10,8 +10,11 @@ const api = axios.create({
 
 export const apis = {
 	articles: () => api.get('/posts'),
-	add: (title,content) => api.post('/posts',{title:title,content:content}),
+	add: (title, content) =>
+		api.post('/posts', { title: title, content: content }),
+	article: (id) => api.get(`/posts/${id}`),
 	login: () => api.post('/posts'),
-	signup: (id,nick,pw,pwcheck) => api.post('/posts',{id:id,nick:nick,pw:pw,pwcheck:pwcheck}),
+	signup: (id, nick, pw, pwcheck) =>
+		api.post('/posts', { id: id, nick: nick, pw: pw, pwcheck: pwcheck }),
 	// 계속해서 증가시켜나갈 예정
 };
