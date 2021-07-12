@@ -55,6 +55,7 @@ const TextArea = styled.textarea`
     box-sizing: border-box;
     resize: none;
     overflow: auto;
+    margin-top: 15px;
 
     &:focus {
        outline:none;

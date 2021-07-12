@@ -40,11 +40,21 @@ const BtnBx = styled.button`
 				opacity: 80%;
 			}
 		`}
+	${(props) => 
+		props.yellow &&
+		css`
+			background-color: #F2C94C;
+			color: #fff;
+			&:hover {
+				opacity: 80%;
+			}
+		`}
 	border: none;
 	padding: 10px 20px;
 	border-radius: 8px;
 	cursor: pointer;
 	font-weight: 700;
 	font-size: 14px;
+	background-color:${(props) => props.bg};
 `;
 export default Button;
