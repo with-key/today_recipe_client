@@ -11,37 +11,34 @@ import { useDispatch } from 'react-redux';
 import { Logo, Button, Flex } from '../elem';
 
 const Header = (props) => {
-	console.log(props);
 	const dispatch = useDispatch();
 	const is_login = useSelector((state) => state.user.is_login);
 
-	// if (is_login) {
-	// 	return (
-	// 		<Container>
-	// 			<div>
-	// 				<img src='%PUBLIC_URL%/logo.svg' alt='logo' />
-	// 			</div>
-	// 			<Flex gap='10px;'>
-	// 				<Button primary>내 정보</Button>
-	// 				<Button
-	// 					primary
-	// 					onClick={() => {
-	// 						dispatch(userCreators.logOutDB());
-	// 					}}
-	// 				>
-	// 					로그아웃
-	// 				</Button>
-	// 			</Flex>
-	// 		</Container>
-	// 	);
-	// }
+	if (is_login) {
+		return (
+			<Container>
+				<Logo history={history} />
+				<Flex gap='10px;'>
+					<Button primary>내 정보</Button>
+					<Button
+						primary
+						_onClick={() => {
+							dispatch(userCreators.logOutDB());
+						}}
+					>
+						로그아웃
+					</Button>
+				</Flex>
+			</Container>
+		);
+	}
 	return (
 		<Container>
 			<Logo history={history} />
 			<Flex gap='10px;'>
 				<Button
 					primary
-					onClick={() => {
+					_onClick={() => {
 						history.push('/login');
 					}}
 				>
@@ -49,7 +46,7 @@ const Header = (props) => {
 				</Button>
 				<Button
 					primary
-					onClick={() => {
+					_onClick={() => {
 						history.push('/signup');
 					}}
 				>

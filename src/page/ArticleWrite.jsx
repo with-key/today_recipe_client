@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Text, Input, Button } from '../elem';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { articleActions } from '../modules/article';
 
 import Template from '../components/Template';
@@ -11,15 +11,17 @@ import Upload from '../shared/upload';
 
 
 const ArticleWrite = (props) => {
+    const user = useSelector(state => state.user)
     const dispatch = useDispatch();
 
-    const [title, setTitle] = React.useState('');
-    const [content, setContent] = React.useState('');
+    console.log(user)
 
-    const WriteSucces = () => {
-        dispatch(articleActions.addArticleDB(title,content));
+    const [contents, setContents] = React.useState({title:'',content:''});
+
+
+    const WriteSucces = () => { // upload하기 이따 같이 넣기
+        dispatch(articleActions.addArticleDB(contents));
     }
-    console.log(title)
 
     return (
         <React.Fragment>
@@ -28,19 +30,19 @@ const ArticleWrite = (props) => {
                     <Box>
                         <Upload />
                         <Grid>
-                            <Text size="28px" bold>제목</Text>
+                            <Text fs="28px" mg="0 0 30px 0" bold>제목</Text>
                             <Input label="오늘의 레시피 제목을 작성해주세요!" _onChange={(e) => {
-                                setTitle(e.target.value);
+                                setContents({...contents,title:e.target.value});
                             }}/>
                         </Grid>
                         <Grid>
-                            <Text size="28px" margin="30px 0 0 0" bold>레시피</Text>
+                            <Text fs="28px" mg="30px 0 30px 0" bold>레시피</Text>
                             <Input multiLine label="선정하신 요리의 레시피를 작성해주세요!" _onChange={(e) => {
-                                setContent(e.target.value);
+                                setContents({...contents,content:e.target.value})
                             }}/>
                         </Grid>
                         <BtnBox>
-                            <Button primary large onClick={WriteSucces}>작성완료</Button>
+                            <Button primary large _onClick={WriteSucces}>작성완료</Button>
                         </BtnBox>
                     </Box>
                 </Container>
