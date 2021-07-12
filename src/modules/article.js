@@ -2,6 +2,8 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { apis } from '../shared/api';
 import { useSelector } from 'react-redux';
+import { imageCreators } from './image';
+
 
 // action
 const LOAD = 'article/LOAD';
@@ -26,6 +28,7 @@ export const __loadAarticles =
 		try {
 			const { data } = await apis.articles();
 			dispatch(loadAarticles(data));
+			dispatch(imageCreators.setPreview(null));
 		} catch (e) {
 			console.log(`아티클 조회 오류 발생!${e}`);
 		}
@@ -33,13 +36,18 @@ export const __loadAarticles =
 
 const addArticleDB = (contents) => {
 	return function (dispatch, getState, { history }) {
-        const _image = getState().image.preview;
-        
+		const imageUrl = getState().image.imageUrl;
+		const content = {
+			...contents,
+			imageUrl: imageUrl
+		}
+
 		apis
-			.add(contents)
+			.add(content)
 			.then(() => {
-                dispatch(addArticle(contents));
+                dispatch(addArticle(content));
 				history.push('/');
+				dispatch(imageCreators.setPreview(null));
 			})
 			.catch((err) => {
 				console.log(err);

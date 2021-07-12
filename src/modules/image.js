@@ -1,28 +1,34 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import AWS from 'aws-sdk';
 
 const PREVIEW = 'image/PREVIEW';
+const UPLOAD = 'image/UPLOAD';
 
-const setPreview = createAction(PREVIEW, (image_url) => ({ image_url }));
+const setPreview = createAction(PREVIEW, (preview) => ({ preview }));
+const imageUpload = createAction(UPLOAD, (imageUrl) => ({imageUrl}))
 
 const initialState = {
-	preview: null,
+	imageUrl: null,
+    preview: null,
 };
 
 export default handleActions(
 	{
-		[PREVIEW]: (state, action) =>
+		[UPLOAD]: (state, action) =>
 			produce(state, (draft) => {
-				console.log(action);
-				draft.preview = action.payload.image_url;
-			}),
+				draft.imageUrl = action.payload.imageUrl;
+		}),
+        [PREVIEW]: (state, action) => 
+            produce(state, (draft) => {
+                draft.preview = action.payload.preview;
+        }),
 	},
 	initialState,
 );
 
 const imageCreators = {
 	setPreview,
+    imageUpload,
 };
 
 export { imageCreators };
