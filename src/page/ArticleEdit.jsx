@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { Text, Input, Button } from '../elem';
 
 import Template from '../components/Template';
-import Upload from '../shared/upload';
 
 const ArticleEdit = ({ match, history }) => {
 	const [title, setTitle] = useState('');
@@ -34,7 +33,6 @@ const ArticleEdit = ({ match, history }) => {
 			<Template>
 				<Container>
 					<Box>
-						<Upload />
 						<Grid>
 							<Text size='28px' bold>
 								제목

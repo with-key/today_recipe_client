@@ -5,7 +5,11 @@ import axios from 'axios';
 
 const api = axios.create({
 	// 인스턴스
-	baseURL: 'http://3.34.140.51',
+	baseURL: 'http://localhost:4000', // 저희 서버 아이피로 변경하세요!
+	headers: {
+		'content-type': 'application/json;charset=UTF-8',
+		accept: 'application/json,',
+	},
 });
 
 export const apis = {
