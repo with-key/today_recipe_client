@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Text, Input, Button } from '../elem';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { articleActions } from '../modules/article';
 
 import Template from '../components/Template';

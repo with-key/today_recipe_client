@@ -4,8 +4,8 @@ import { deleteCookie, setCookie } from '../shared/Cookie';
 import { apis } from '../shared/api';
 
 // action
-const LOGIN = 'LOGIN';
-const LOGOUT = 'LOGOUT';
+const LOGIN = 'user/LOGIN';
+const LOGOUT = 'user/LOGOUT';
 
 // action creator
 const setLogin = createAction(LOGIN, (user) => ({ user }));
@@ -17,16 +17,14 @@ const initialState = {
 	is_login: false,
 };
 
-const registerDB = (id, nick, pw, pwcheck) => {
+const registerDB = (id, email, pw, pwcheck) => {
 	return function (dispatch, getState, { history }) {
 		apis
-			.signup(id, nick, pw, pwcheck)
+			.signup(id, email, pw, pwcheck)
 			.then(() => {
+				setCookie('is_login', 'true', 5);
 				dispatch(
-					setLogin({
-						id: id,
-						nick: nick,
-					}),
+					setLogin({id: id}),
 				);
 				history.push('/');
 			})
@@ -39,15 +37,28 @@ const registerDB = (id, nick, pw, pwcheck) => {
 // Thunk function
 const setLoginDB = (id, pwd) => {
 	return function (dispatch, getState, { history }) {
-		dispatch(setLogin());
-		history.replace('/');
+		apis
+		.login(id,pwd)
+		.then((res) => {
+			setCookie('is_login', 'true', 5);
+			console.log(res)
+			dispatch(setLogin({id: id,}));
+			history.replace('/');
+		}).catch(err => {
+			console.log(err)
+		})
 	};
 };
 
 const logOutDB = () => {
 	return function (dispatch, getState, { history }) {
-		dispatch(logOut());
-		history.push('/');
+		apis
+		.logout()
+		.then(() => {
+			deleteCookie('is_login');
+			dispatch(logOut());
+			history.push('/');
+		})
 	};
 };
 
@@ -56,13 +67,11 @@ export default handleActions(
 	{
 		[LOGIN]: (state, action) =>
 			produce(state, (draft) => {
-				setCookie('result', 'success', 5);
 				draft.user = action.payload.user;
 				draft.is_login = true;
 			}),
 		[LOGOUT]: (state, action) =>
 			produce(state, (draft) => {
-				deleteCookie('result');
 				draft.user = null;
 				draft.is_login = false;
 			}),
