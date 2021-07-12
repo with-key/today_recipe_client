@@ -5,6 +5,7 @@ import { Row, Button, Text } from '../elem';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
+	console.log(articles);
 	return (
 		<Container>
 			<Title>
@@ -46,16 +47,16 @@ const List = ({ history }) => {
 							{item.id}
 						</Col>
 						<Col width='50%' centerY>
-							{item.title}
+							{item.title} {item.imageUrl ? '📷' : ''}
 						</Col>
 						<Col width='20%' centerY centerX>
-							<Text mg='10px 0'>{item.user.userId}</Text>
+							<Text mg='10px 0'>{item.username}</Text>
 						</Col>
 						<Col width='10%' centerY centerX>
-							{item.views}
+							{/* 조회수 */} 10
 						</Col>
 						<Col width='10%' centerY centerX>
-							{item.isLikeCnt}
+							{/* 좋아요 수 */} 12
 						</Col>
 						<Col width='10%' centerY>
 							{item.createdAt}

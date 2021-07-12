@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Flex, Text, Button } from '../elem';
 import styled from 'styled-components';
+
+// redux & api
+import { useDispatch, useSelector } from 'react-redux';
+import { __getComments } from '../modules/comment';
+import { __loadAarticles, __loadAarticleGetId } from '../modules/article';
+
+// compo
 import Template from '../components/Template';
 import List from '../components/List';
-import { __loadAarticles, __loadAarticleGetId } from '../modules/article';
-import { __getComments } from '../modules/comment';
-import CommentForm from '../components/CommentForm';
 import Comments from '../components/Comments';
+import CommentForm from '../components/CommentForm';
+
+// elem
+import { Flex, Text, Button } from '../elem';
 
 const Article = ({ history, match }) => {
 	const article = useSelector((store) => store.article.article);
@@ -16,6 +22,7 @@ const Article = ({ history, match }) => {
 	const {
 		params: { id },
 	} = match;
+	console.log(id);
 
 	useEffect(() => {
 		dispatch(__loadAarticles());
@@ -68,13 +75,16 @@ const Article = ({ history, match }) => {
 						</Flex>
 						<Flex gap='10px'>
 							<Text color='#333' fs='16px'>
-								조회 {article.views}
+								조회 10
+								{/* {article.views} */}
 							</Text>
 							<Text color='#333' fs='16px'>
-								댓글 {article.commentCnt}
+								댓글 10
+								{/* {article.commentCnt} */}
 							</Text>
 							<Text color='#333' fs='16px'>
-								좋아요 {article.isLikeCnt}
+								좋아요 10
+								{/* {article.isLikeCnt} */}
 							</Text>
 						</Flex>
 					</Title>
@@ -82,7 +92,7 @@ const Article = ({ history, match }) => {
 						<Info>
 							<Flex between>
 								<Text fs='18px' fw='500' color='#333'>
-									{article.user.userId}
+									{article.username}
 								</Text>
 								<Text fs='18px' fw='500' color='gray'>
 									{article.createdAt}
@@ -90,6 +100,9 @@ const Article = ({ history, match }) => {
 							</Flex>
 						</Info>
 						<Desc>
+							<Flex center mg='20px 0'>
+								<img src={article.imageUrl} alt='img'></img>
+							</Flex>
 							<Text fs='16px' color='#333' lh='150%'>
 								{article.content}
 							</Text>
@@ -98,11 +111,11 @@ const Article = ({ history, match }) => {
 							<Button primary>좋아요 {article.isLikeCnt}</Button>
 						</Flex>
 					</Main>
-					{comments.map((comment) => (
+					{/* {comments.map((comment) => (
 						<Comments comment={comment} key={comment.id} />
-					))}
+					))} */}
 				</Contents>
-				<CommentForm />
+				<CommentForm id={id} />
 				<List history={history} />
 			</Container>
 		</Template>

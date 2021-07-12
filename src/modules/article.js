@@ -4,7 +4,6 @@ import { apis } from '../shared/api';
 import { useSelector } from 'react-redux';
 import { imageCreators } from './image';
 
-
 // action
 const LOAD = 'article/LOAD';
 const LOAD_ID = 'article/LOAD_Id';
@@ -39,13 +38,13 @@ const addArticleDB = (contents) => {
 		const imageUrl = getState().image.imageUrl;
 		const content = {
 			...contents,
-			imageUrl: imageUrl
-		}
+			imageUrl: imageUrl,
+		};
 
 		apis
 			.add(content)
 			.then(() => {
-                dispatch(addArticle(content));
+				dispatch(addArticle(content));
 				history.push('/');
 				dispatch(imageCreators.setPreview(null));
 			})
@@ -83,9 +82,10 @@ export default handleActions(
 				article: action.payload.id,
 			};
 		},
-		[ADD_ARTICLE]: (state, action) => produce(state, (draft) => {
-            draft.list.push(action.payload.articles)
-        }),
+		[ADD_ARTICLE]: (state, action) =>
+			produce(state, (draft) => {
+				draft.list.push(action.payload.articles);
+			}),
 	},
 	initialState,
 );

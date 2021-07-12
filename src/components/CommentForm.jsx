@@ -4,20 +4,20 @@ import styled from 'styled-components';
 import { Button, Flex } from '../elem';
 import { __addComment } from '../modules/comment';
 
-const CommentForm = () => {
+const CommentForm = ({ id }) => {
 	const dispatch = useDispatch();
-	const [text, setText] = useState();
+	const [content, setContent] = useState();
 
 	return (
 		<Container
 			onSubmit={(e) => {
 				e.preventDefault();
-				dispatch(__addComment(text));
+				dispatch(__addComment(id, content));
 			}}
 		>
 			<CommentInput
 				onChange={(e) => {
-					setText(e.target.value);
+					setContent(e.target.value);
 				}}
 			></CommentInput>
 			<Flex right mg='24px 0'>

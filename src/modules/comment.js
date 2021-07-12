@@ -17,11 +17,11 @@ const initialState = {
 
 // Thunk function
 export const __addComment =
-	(text) =>
+	(id, content) =>
 	async (dispatch, getState, { history }) => {
 		try {
-			const data = await apis.addComment({ text });
-			// 작업중
+			const data = await apis.addComment(id, content);
+			console.log(data);
 		} catch (e) {}
 	};
 
