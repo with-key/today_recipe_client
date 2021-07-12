@@ -5,10 +5,13 @@ import styled from 'styled-components';
 import Template from '../components/Template';
 import List from '../components/List';
 import { __loadAarticles, __loadAarticleGetId } from '../modules/article';
+import { __getComments } from '../modules/comment';
 import CommentForm from '../components/CommentForm';
+import Comments from '../components/Comments';
 
 const Article = ({ history, match }) => {
 	const article = useSelector((store) => store.article.article);
+	const comments = useSelector((store) => store.comment.comments);
 	const dispatch = useDispatch();
 	const {
 		params: { id },
@@ -17,6 +20,7 @@ const Article = ({ history, match }) => {
 	useEffect(() => {
 		dispatch(__loadAarticles());
 		dispatch(__loadAarticleGetId(id));
+		dispatch(__getComments(id));
 	}, [id]);
 
 	if (!article) {
@@ -58,7 +62,7 @@ const Article = ({ history, match }) => {
 						<Info>
 							<Flex between>
 								<Text fs='18px' fw='500' color='#333'>
-									{/* {article.user.userId} */}
+									{article.user.userId}
 								</Text>
 								<Text fs='18px' fw='500' color='gray'>
 									{article.createdAt}
@@ -74,25 +78,9 @@ const Article = ({ history, match }) => {
 							<Button primary>좋아요 {article.isLikeCnt}</Button>
 						</Flex>
 					</Main>
-					<Comments>
-						<Main>
-							<Info>
-								<Flex between>
-									<Text fs='18px' fw='500' color='#333'>
-										{/* {article.user.userId} */}
-									</Text>
-									<Text fs='18px' fw='500' color='gray'>
-										{article.createdAt}
-									</Text>
-								</Flex>
-							</Info>
-							<Desc>
-								<Text fs='16px' color='#333' lh='150%'>
-									{article.content}
-								</Text>
-							</Desc>
-						</Main>
-					</Comments>
+					{comments.map((comment) => (
+						<Comments comment={comment} key={comment.id} />
+					))}
 				</Contents>
 				<CommentForm />
 				<List history={history} />
@@ -131,11 +119,4 @@ const Contents = styled.div`
 	min-height: 300px;
 `;
 
-const Comments = styled.div`
-	margin-left: auto;
-	padding: 24px 0 48px 0px;
-	width: 95%;
-	min-height: 300px;
-	border-top: 2px solid #ddd;
-`;
 export default Article;

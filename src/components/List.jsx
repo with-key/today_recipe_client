@@ -101,7 +101,7 @@ const Title = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 48px 32px;
+	padding: 32px 32px 0 32px;
 	margin-bottom: 50px;
 `;
 
