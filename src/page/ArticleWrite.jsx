@@ -5,9 +5,11 @@ import { Text, Input, Button } from '../elem';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { articleActions } from '../modules/article';
+import { imageCreators } from '../modules/image';
+import Image from '../elem/Image';
 
 import Template from '../components/Template';
-import Upload from '../shared/upload';
+import AWS from 'aws-sdk';
 
 const ArticleWrite = (props) => {
 	const dispatch = useDispatch();
@@ -15,19 +17,69 @@ const ArticleWrite = (props) => {
 	const [title, setTitle] = React.useState('');
 	const [content, setContent] = React.useState('');
 
+    const contents = {
+        title: title,
+        content: content,
+    }
+
+    AWS.config.update({
+        region: "ap-northeast-2",
+        credentials: new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: "ap-northeast-2:1341881f-0e47-4578-a076-7cf301309b84",
+        }),
+      })
+
+    const fileInput = React.useRef();
+
+    const filePreview = () => {
+        const reader = new FileReader();
+        const file = fileInput.current.files[0];
+
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            dispatch(imageCreators.setPreview(reader.result));
+        }
+    }
+
+    const preview = useSelector(state => state.image.preview);
+
+    const selectFile = () => {
+        const date = new Date();
+        const file = fileInput.current.files[0];
+
+        const upload = new AWS.S3.ManagedUpload({
+            params: {
+              Bucket: "todayrecipe",
+              Key: file.name + date.getTime() + ".jpg",
+              Body: file,
+            },
+          })
+
+        const promise = upload.promise();
+
+        promise.then((data) => {
+            dispatch(imageCreators.imageUpload(data.Location))
+        }).catch((err) => {
+            window.alert("이미지 업로드에 문제가 있어요!",err)
+        })
+    }
+
 	const WriteSucces = () => {
-		dispatch(articleActions.addArticleDB(title, content));
+        selectFile()
+		dispatch(articleActions.addArticleDB(contents));
 	};
-	console.log(title);
 
 	return (
 		<React.Fragment>
 			<Template>
 				<Container>
 					<Box>
-						<Upload />
+                        <Text fs="20px" mg="0 0 10px 0" fw="600">이미지 업로드</Text>
+                        <label style={{}}for="fileUpload">
+                        <Image shape="rectangle" src={preview? preview: "https://todayrecipe.s3.ap-northeast-2.amazonaws.com/defaultImage.png"}/></label>
+                        <input style={{display:"none"}} type="file" ref={fileInput} onChange={filePreview} id="fileUpload"/>
 						<Grid>
-							<Text size='28px' bold>
+							<Text fs='28px' fw="600" mg="20px 0 10px 0">
 								제목
 							</Text>
 							<Input
@@ -38,7 +90,7 @@ const ArticleWrite = (props) => {
 							/>
 						</Grid>
 						<Grid>
-							<Text size='28px' margin='30px 0 0 0' bold>
+							<Text fs='28px' mg='30px 0 10px 0' fw="600">
 								레시피
 							</Text>
 							<Input
@@ -50,7 +102,7 @@ const ArticleWrite = (props) => {
 							/>
 						</Grid>
 						<BtnBox>
-							<Button primary large onClick={WriteSucces}>
+							<Button primary large _onClick={WriteSucces}>
 								작성완료
 							</Button>
 						</BtnBox>
@@ -61,9 +113,10 @@ const ArticleWrite = (props) => {
 	);
 };
 
+
 const Box = styled.div`
 	width: 70vw;
-	height: 80vh;
+	height: 90vh;
 	background-color: #fff;
 	padding: 60px;
 	box-sizing: border-box;
@@ -84,6 +137,7 @@ const BtnBox = styled.div`
 `;
 
 const Container = styled.div`
+    margin-top: 50px;
 	width: 100%;
 	height: calc(100vh - 150px);
 	display: flex;
