@@ -22,7 +22,6 @@ const registerDB = (id, email, pw, pwcheck) => {
 		apis
 			.signup(id, email, pw, pwcheck)
 			.then(() => {
-				setCookie('is_login', 'true', 5);
 				dispatch(
 					setLogin({id: id}),
 				);
