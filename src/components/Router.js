@@ -5,10 +5,10 @@ import { Route, Switch } from 'react-router-dom';
 import Home from '../page/Home';
 import Login from '../page/Login';
 import SignUp from '../page/SignUp';
-import Header from './Header';
 
 import Article from '../page/Article';
 import ArticleWrite from '../page/ArticleWrite';
+import ArticleEdit from '../page/ArticleEdit';
 
 export default function Router() {
 	return (
@@ -16,6 +16,7 @@ export default function Router() {
 			<Switch>
 				<Route path='/' component={Home} exact />
 				<Route path='/article/:id' component={Article} exact />
+				<Route path='/article/:id/edit' component={ArticleEdit} exact />
 				<Route path='/login' component={Login} exact />
 				<Route path='/signup' component={SignUp} exact />
 				<Route path='/add_article' component={ArticleWrite} exact />

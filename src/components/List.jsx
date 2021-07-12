@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useSelector } from 'react-redux';
-import { Row, Button } from '../elem';
+import { Row, Button, Text } from '../elem';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
@@ -28,13 +28,16 @@ const List = ({ history }) => {
 						제목
 					</Col>
 					<Col width='20%' centerY centerX>
-						작성일 / 작성자
+						작성자
 					</Col>
 					<Col width='10%' centerY centerX>
 						조회수
 					</Col>
 					<Col width='10%' centerY centerX>
 						좋아요
+					</Col>
+					<Col width='10%' centerY centerX>
+						작성시간
 					</Col>
 				</ListHeader>
 				{articles.map((item) => (
@@ -46,16 +49,16 @@ const List = ({ history }) => {
 							{item.title}
 						</Col>
 						<Col width='20%' centerY centerX>
-							<div>
-								<div>{item.createdAt}</div>
-								{/* <div>{item.user.userId}</div> */}
-							</div>
+							<Text mg='10px 0'>{item.user.userId}</Text>
 						</Col>
 						<Col width='10%' centerY centerX>
 							{item.views}
 						</Col>
 						<Col width='10%' centerY centerX>
 							{item.isLikeCnt}
+						</Col>
+						<Col width='10%' centerY>
+							{item.createdAt}
 						</Col>
 					</Row>
 				))}

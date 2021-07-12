@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Text } from '../elem';
+import { Flex, Text, Button } from '../elem';
 
 const Comments = ({ comment }) => {
 	console.log(comment);
@@ -12,9 +12,11 @@ const Comments = ({ comment }) => {
 						<Text fs='18px' fw='500' color='#333'>
 							{comment.userName}
 						</Text>
-						<Text fs='18px' fw='500' color='gray'>
-							2020-01-01 12:00
-						</Text>
+						<Flex>
+							<Text fs='18px' fw='500' color='gray'>
+								2020-01-01 12:00
+							</Text>
+						</Flex>
 					</Flex>
 				</Info>
 				<Desc>
@@ -22,6 +24,10 @@ const Comments = ({ comment }) => {
 						{comment.text}
 					</Text>
 				</Desc>
+				<Flex right gap='10px' mg='10px 0'>
+					<Button small>수정</Button>
+					<Button small>삭제</Button>
+				</Flex>
 			</Main>
 		</Container>
 	);

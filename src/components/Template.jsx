@@ -17,6 +17,7 @@ const Template = ({ children }) => {
 
 const Container = styled.section``;
 const Section = styled.section`
+	min-height: calc(100vh - 440px);
 	width: 100%;
 	display: flex;
 	flex-direction: column;

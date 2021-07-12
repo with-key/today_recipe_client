@@ -15,6 +15,7 @@ Button.defaultProps = {
 	backgroundColor: '#fff',
 	color: '#000',
 };
+
 const BtnBx = styled.button`
 	${(props) =>
 		props.full
@@ -32,6 +33,13 @@ const BtnBx = styled.button`
 			: `width: ${props.width}`};
 
 	${(props) =>
+		props.small
+			? css`
+					width: 100px;
+			  `
+			: `width: ${props.width}`};
+
+	${(props) =>
 		props.primary &&
 		css`
 			background-color: #ff6b6b;
@@ -40,10 +48,10 @@ const BtnBx = styled.button`
 				opacity: 80%;
 			}
 		`}
-	${(props) => 
+	${(props) =>
 		props.yellow &&
 		css`
-			background-color: #F2C94C;
+			background-color: #f2c94c;
 			color: #fff;
 			&:hover {
 				opacity: 80%;
@@ -55,6 +63,6 @@ const BtnBx = styled.button`
 	cursor: pointer;
 	font-weight: 700;
 	font-size: 14px;
-	background-color:${(props) => props.bg};
+	background-color: ${(props) => props.bg};
 `;
 export default Button;

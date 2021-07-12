@@ -36,15 +36,35 @@ const Article = ({ history, match }) => {
 							<Text fs='40px' mg='20px 0' fw='600'>
 								{article.title}
 							</Text>
-							<Button
-								large
-								primary
-								_onClick={() => {
-									history.push('/');
-								}}
-							>
-								목록으로
-							</Button>
+							<Flex gap='10px'>
+								<Button
+									large
+									primary
+									_onClick={() => {
+										history.push(`/article/${id}/edit`);
+									}}
+								>
+									수정
+								</Button>
+								<Button
+									large
+									primary
+									_onClick={() => {
+										history.push('/');
+									}}
+								>
+									삭제
+								</Button>
+								<Button
+									large
+									primary
+									_onClick={() => {
+										history.push('/');
+									}}
+								>
+									목록으로
+								</Button>
+							</Flex>
 						</Flex>
 						<Flex gap='10px'>
 							<Text color='#333' fs='16px'>
@@ -74,7 +94,7 @@ const Article = ({ history, match }) => {
 								{article.content}
 							</Text>
 						</Desc>
-						<Flex right mg='20px 0'>
+						<Flex right mg='10px 0'>
 							<Button primary>좋아요 {article.isLikeCnt}</Button>
 						</Flex>
 					</Main>
