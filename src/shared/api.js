@@ -9,23 +9,29 @@ const api = axios.create({
 });
 
 export const apis = {
-	articles: () => api.get('/posts'),
+	// article
 	add: (contents) => api.post('/posts', contents),
+	edit: () => {},
+	articles: () => api.get('/posts'),
 	article: (id) => api.get(`/posts/${id}`),
-	login: (id, pw) => api.post('/user', { username: id, password: pw }),
-	signup: (id, email, pw, pwcheck) =>
-		api.post('/user', {
-			username: id,
-			email: email,
-			password: pw,
-			passwordCheck: pwcheck,
-		}),
-	logout: () => api.post('/user'),
+
+	// comment
 	addComment: (comment) => api.post('/comments', comment),
 	comments: (id) =>
 		api.get('/comments/', {
 			params: {
 				postId: id,
 			},
+		}),
+
+	// login
+	login: (id, pw) => api.post('/user', { username: id, password: pw }),
+	logout: () => api.post('/user'),
+	signup: (id, email, pw, pwcheck) =>
+		api.post('/user', {
+			username: id,
+			email: email,
+			password: pw,
+			passwordCheck: pwcheck,
 		}),
 };
