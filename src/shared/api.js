@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const api = axios.create({
 	// 인스턴스
-	baseURL: 'http://localhost:4000/',
+	baseURL: 'http://3.34.140.51',
 });
 
 export const apis = {
@@ -14,11 +14,11 @@ export const apis = {
 	article: (id) => api.get(`/posts/${id}`),
 	login: (id, pw) => api.post('/user', { username: id, password: pw }),
 	signup: (id, email, pw, pwcheck) =>
-		api.post('/user', {
+		api.post('/user/signup', {
 			username: id,
 			email: email,
 			password: pw,
-			passwordCheck: pwcheck,
+			repassword: pwcheck,
 		}),
 	logout: () => api.post('/user'),
 	addComment: (comment) => api.post('/comments', comment),
