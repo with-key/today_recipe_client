@@ -9,8 +9,6 @@ import styled from 'styled-components';
 import { Button, Text, Input } from '../elem/index';
 import Template from '../components/Template';
 
-import { login } from '../shared/api';
-
 const Login = (props) => {
 	const dispatch = useDispatch();
 

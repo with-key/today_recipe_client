@@ -54,14 +54,10 @@ const setLoginDB =
 	async (dispatch, getState, { history }) => {
 		console.log(id, pwd);
 		try {
-			login(id, pwd);
+			const data = await apis.login(id, pwd);
 		} catch (e) {
 			console.log(e);
 		}
-
-		// setCookie('is_login', 'true', 5);
-		// dispatch(setLogin({ id, pwd }));
-		// history.replace('/');
 	};
 
 const logOutDB = () => {
