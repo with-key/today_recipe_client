@@ -9,6 +9,7 @@
 		"aws-sdk": "^2.943.0",
 		"axios": "^0.21.1",
 		"connected-react-router": "^6.9.1",
+		"crypto-js": "^4.0.0",
 		"history": "4.10.1",
 		"immer": "^9.0.5",
 		"react": "^17.0.2",
