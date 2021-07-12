@@ -5,7 +5,6 @@ import { Row, Button } from '../elem';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
-	console.log(articles);
 	return (
 		<Container>
 			<Title>
@@ -49,7 +48,7 @@ const List = ({ history }) => {
 						<Col width='20%' centerY centerX>
 							<div>
 								<div>{item.createdAt}</div>
-								<div>{item.user.userId}</div>
+								{/* <div>{item.user.userId}</div> */}
 							</div>
 						</Col>
 						<Col width='10%' centerY centerX>
