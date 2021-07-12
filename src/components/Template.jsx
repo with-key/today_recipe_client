@@ -10,7 +10,7 @@ const Template = ({ children }) => {
 		<Container>
 			<Header />
 			<Section>{children}</Section>
-			{/* <Footer /> */}
+			<Footer />
 		</Container>
 	);
 };
@@ -18,7 +18,6 @@ const Template = ({ children }) => {
 const Container = styled.section``;
 const Section = styled.section`
 	width: 100%;
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

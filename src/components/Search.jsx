@@ -42,7 +42,7 @@ const Input = styled.input`
 	border-radius: 10px;
 	outline: none;
 	&:focus {
-		border: 2px solid #ff6b6b;
+		border: 3px solid #ff6b6b;
 	}
 `;
 

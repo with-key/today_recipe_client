@@ -5,7 +5,7 @@ import { Row, Button } from '../elem';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
-	console.log(articles);
+
 	return (
 		<Container>
 			<Title>
@@ -102,7 +102,7 @@ const Title = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 48px 32px;
+	padding: 32px 32px 0 32px;
 	margin-bottom: 50px;
 `;
 
