@@ -8,6 +8,7 @@ import logger from 'redux-logger';
 import user from './user';
 import article from './article';
 import comment from './comment';
+import image from './image';
 
 // redux router
 import { createBrowserHistory } from 'history';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
 	comment,
 	article,
 	user,
+	image,
 	router: connectRouter(history),
 });
 const middleware = [thunk.withExtraArgument({ history }), logger];
