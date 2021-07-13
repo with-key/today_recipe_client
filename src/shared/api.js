@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const accessToken = document.cookie.split(';')[0].split('=')[1]
+const accessToken = document.cookie.split('=')[1]
 
 const api = axios.create({
 	// 인스턴스
