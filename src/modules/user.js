@@ -37,9 +37,9 @@ const setLoginDB = (id, pwd) => {
 			.login(id, pwd)
 			.then((res) => {
 				setCookie('token', res.data[1].token, 7);
-				setCookie('username', res.data[0].username, 7);
+				localStorage.setItem('username',res.data[0].username);
 				dispatch(setLogin({ id: id }));
-				history.replace('/');
+				history.replace('/login');
 			})
 			.catch((err) => {
 				console.log(err);
@@ -50,7 +50,7 @@ const setLoginDB = (id, pwd) => {
 const logOutDB = () => {
 	return function (dispatch, getState, { history }) {
 		deleteCookie('token');
-		deleteCookie('username');
+		localStorage.removeItem('username');
 		dispatch(logOut());
 		history.replace('/login');
 	};

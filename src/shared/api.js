@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const accessToken = document.cookie.split('=')[1];
-
 const api = axios.create({
 	baseURL: 'http://3.34.140.51',
 	headers: {
