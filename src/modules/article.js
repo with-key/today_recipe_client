@@ -7,11 +7,19 @@ import { imageCreators } from './image';
 const LOAD = 'article/LOAD';
 const LOAD_ID = 'article/LOAD_Id';
 const ADD_ARTICLE = 'article/ADD_ARTICLE';
+const EDIT = 'article/EDIT';
+const DELETE = 'article/DELETE';
 
 // action creator
 const loadAarticles = createAction(LOAD, (articles) => ({ articles }));
 const loadArticleGetId = createAction(LOAD_ID, (id) => ({ id }));
 const addArticle = createAction(ADD_ARTICLE, (articles) => ({ articles }));
+const editArticle = createAction(EDIT, (id, newArticle) => ({
+	id,
+	newArticle,
+}));
+
+const delArticle = createAction(DELETE, (id) => ({ id }));
 
 // initialState
 const initialState = {
@@ -52,11 +60,31 @@ export const __loadAarticleGetId =
 	async (dispatch, getState, { history }) => {
 		try {
 			const { data } = await apis.article(id);
-
 			dispatch(loadArticleGetId(data));
 		} catch (e) {
 			console.log(`개별 아티클 조회 오류 발생!${e}`);
 		}
+	};
+
+export const __editArticle =
+	(id, newArticle) =>
+	async (dispatch, getState, { history }) => {
+		try {
+			await apis.edit(id, newArticle);
+			dispatch(editArticle(id, newArticle));
+			history.goBack();
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+export const __delArticle =
+	(id) =>
+	async (dispatch, getState, { history }) => {
+		try {
+			await apis.del(id);
+			history.replace('/');
+		} catch (e) {}
 	};
 
 // reducer
@@ -79,6 +107,12 @@ export default handleActions(
 			produce(state, (draft) => {
 				draft.list.push(action.payload.articles);
 			}),
+		[EDIT]: (state, action) => {
+			return {
+				...state,
+				// 상태관리할 필요가 없는 것 같다...
+			};
+		},
 	},
 	initialState,
 );
