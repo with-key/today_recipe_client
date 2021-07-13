@@ -37,11 +37,7 @@ const setLoginDB = (id, pwd) => {
 			.login(id, pwd)
 			.then((res) => {
 				setCookie('token', res.data[1].token, 7);
-<<<<<<< HEAD
-				setCookie('username',res.data[0].username, 7);
-=======
 				setCookie('username', res.data[0].username, 7);
->>>>>>> 0263c30e60321201fce2ac5fe59d0e2be1031bd7
 				dispatch(setLogin({ id: id }));
 				history.replace('/');
 			})
