@@ -7,7 +7,11 @@ import { __editArticle } from '../modules/article';
 import { useDispatch } from 'react-redux';
 
 const ArticleEdit = ({ match, history }) => {
-	const [contents, setContents] = useState({ title: '', content: '' });
+	const [contents, setContents] = useState({
+		title: '',
+		content: '',
+		imageUrl: '',
+	});
 	const dispatch = useDispatch();
 
 	const {
@@ -18,9 +22,9 @@ const ArticleEdit = ({ match, history }) => {
 		const fetchArticle = async () => {
 			try {
 				const {
-					data: { title, content },
+					data: { title, content, imageUrl },
 				} = await apis.article(id);
-				setContents({ title, content });
+				setContents({ title, content, imageUrl });
 			} catch (e) {
 				console.log(`아티클 불러오기 오류 : ${e}`);
 			}

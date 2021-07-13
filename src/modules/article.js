@@ -42,6 +42,7 @@ export const __loadAarticles =
 
 export const addArticleDB = (content) => {
 	return function (dispatch, getState, { history }) {
+		console.log(content);
 		apis
 			.add(content)
 			.then(() => {
@@ -70,6 +71,7 @@ export const __loadAarticleGetId =
 export const __editArticle =
 	(id, newArticle) =>
 	async (dispatch, getState, { history }) => {
+		console.log(id, newArticle);
 		try {
 			await apis.edit(id, newArticle);
 			dispatch(editArticle(id, newArticle));
