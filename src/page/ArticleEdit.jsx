@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
 import { apis } from '../shared/api';
-
 import styled from 'styled-components';
 import { Text, Input, Button } from '../elem';
-
 import Template from '../components/Template';
 
 const ArticleEdit = ({ match, history }) => {
