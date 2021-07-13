@@ -40,7 +40,7 @@ const Login = (props) => {
                     <Text cursor="pointer" color="#199BC3" ta="right" mg="20px 0 0 0">비밀번호를 분실하셨나요?</Text> 
                     <BtnBox>
                         <Button margin primary width="360px" _onClick={login}>로그인하기</Button>
-                        <Button yellow width="360px">카카오로 로그인</Button>
+                        <Button _onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=da65b296da95167e0361d5f5a2190a46&redirect_uri=http://code-angler.shop/user/kakao/callback&response_type=code'" yellow width="360px">카카오로 로그인</Button>
                     </BtnBox>
                     <TextBox>
                         <Text mg="0 10px 0 0">아직 계정이 없으신가요?</Text>
