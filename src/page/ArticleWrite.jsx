@@ -10,9 +10,13 @@ import Image from '../elem/Image';
 
 import Template from '../components/Template';
 import AWS from 'aws-sdk';
+// import jwtDecode from 'jwt-decode';
 
 const ArticleWrite = (props) => {
 	const dispatch = useDispatch();
+
+	// const tokens = document.cookie.split('=')[1];
+	// console.log(jwtDecode(tokens));
 
 	const [title, setTitle] = React.useState('');
 	const [content, setContent] = React.useState('');

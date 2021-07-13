@@ -36,7 +36,8 @@ const setLoginDB = (id, pwd) => {
 		apis
 			.login(id, pwd)
 			.then((res) => {
-				setCookie('token', res.data, 7);
+				setCookie('token', res.data[1].token, 7);
+				setCookie('username',res.data[0].username, 7);
 				dispatch(setLogin({ id: id }));
 				history.replace('/');
 			})
@@ -49,6 +50,7 @@ const setLoginDB = (id, pwd) => {
 const logOutDB = () => {
 	return function (dispatch, getState, { history }) {
 		deleteCookie('token');
+		deleteCookie('username');
 		dispatch(logOut());
 		history.push('/');
 	};

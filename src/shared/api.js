@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// const accessToken = document.cookie.split('=')[1]
+const accessToken = document.cookie.split(';')[0].split('=')[1]
 
 const api = axios.create({
 	// 인스턴스
@@ -9,6 +9,7 @@ const api = axios.create({
 	headers: {
 		'content-type': 'application/json;charset=UTF-8',
 		accept: 'application/json,',
+		"X-AUTH-TOKEN": `${accessToken}`
 	},
 });
 
@@ -21,7 +22,7 @@ const api = axios.create({
 // 	},
 // })
 
-// api.defaults.headers.common['Authorization'] = `${accessToken}`;
+// api.defaults.headers.common['Authorization'] = `bearer ${accessToken}`;
 
 export const apis = {
 	// article
