@@ -39,7 +39,7 @@ const setLoginDB = (id, pwd) => {
 				setCookie('token', res.data[1].token, 7);
 				localStorage.setItem('username',res.data[0].username);
 				dispatch(setLogin({ id: id }));
-				history.replace('/');
+				history.replace('/login');
 			})
 			.catch((err) => {
 				console.log(err);
@@ -52,7 +52,7 @@ const logOutDB = () => {
 		deleteCookie('token');
 		localStorage.removeItem('username');
 		dispatch(logOut());
-		history.push('/');
+		history.replace('/login');
 	};
 };
 
@@ -62,6 +62,7 @@ export default handleActions(
 		[LOGIN]: (state, action) =>
 			produce(state, (draft) => {
 				draft.user = action.payload.user;
+				draft.is_login = true;
 			}),
 		[LOGOUT]: (state, action) =>
 			produce(state, (draft) => {

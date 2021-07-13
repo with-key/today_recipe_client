@@ -23,69 +23,87 @@ const ArticleWrite = (props) => {
 	const [title, setTitle] = React.useState('');
 	const [content, setContent] = React.useState('');
 
-    const contents = {
-        title: title,
-        content: content,
-    }
+	const contents = {
+		title: title,
+		content: content,
+	};
 
-    AWS.config.update({
-        region: "ap-northeast-2",
-        credentials: new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: "ap-northeast-2:1341881f-0e47-4578-a076-7cf301309b84",
-        }),
-      })
+	AWS.config.update({
+		region: 'ap-northeast-2',
+		credentials: new AWS.CognitoIdentityCredentials({
+			IdentityPoolId: 'ap-northeast-2:1341881f-0e47-4578-a076-7cf301309b84',
+		}),
+	});
 
-    const fileInput = React.useRef();
+	const fileInput = React.useRef();
 
-    const filePreview = () => {
-        const reader = new FileReader();
-        const file = fileInput.current.files[0];
+	const filePreview = () => {
+		const reader = new FileReader();
+		const file = fileInput.current.files[0];
 
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            dispatch(imageCreators.setPreview(reader.result));
-        }
-    }
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			dispatch(imageCreators.setPreview(reader.result));
+		};
+	};
 
-    const preview = useSelector(state => state.image.preview);
+	const preview = useSelector((state) => state.image.preview);
 
-    const selectFile = () => {
-        const date = new Date();
-        const file = fileInput.current.files[0];
+	const selectFile = () => {
+		const date = new Date();
+		const file = fileInput.current.files[0];
 
-        const upload = new AWS.S3.ManagedUpload({
-            params: {
-              Bucket: "todayrecipe",
-              Key: file.name + date.getTime() + ".jpg",
-              Body: file,
-            },
-          })
+		const upload = new AWS.S3.ManagedUpload({
+			params: {
+				Bucket: 'todayrecipe',
+				Key: file.name + date.getTime() + '.jpg',
+				Body: file,
+			},
+		});
 
-        const promise = upload.promise();
+		const promise = upload.promise();
 
-        promise.then((data) => {
-            dispatch(imageCreators.imageUpload(data.Location));
-			const content = {
-				...contents,
-				imageUrl: data.Location
-			}
-			dispatch(articleActions.addArticleDB(content));
-        }).catch((err) => {
-            window.alert("이미지 업로드에 문제가 있어요!",err)
-        })
-    }
+		promise
+			.then((data) => {
+				dispatch(imageCreators.imageUpload(data.Location));
+				const content = {
+					...contents,
+					imageUrl: data.Location,
+				};
+				dispatch(articleActions.addArticleDB(content));
+			})
+			.catch((err) => {
+				window.alert('이미지 업로드에 문제가 있어요!', err);
+			});
+	};
 
 	return (
 		<React.Fragment>
 			<Template>
 				<Container>
 					<Box>
-                        <Text fs="20px" mg="0 0 10px 0" fw="600">이미지 업로드</Text>
-                        <label style={{}} htmlFor="fileUpload">
-                        <Image shape="rectangle" src={preview? preview: "https://todayrecipe.s3.ap-northeast-2.amazonaws.com/defaultImage.png"}/></label>
-                        <input style={{display:"none"}} type="file" ref={fileInput} onChange={filePreview} id="fileUpload"/>
+						<Text fs='20px' mg='0 0 10px 0' fw='600'>
+							이미지 업로드
+						</Text>
+						<label style={{}} htmlFor='fileUpload'>
+							<Image
+								shape='rectangle'
+								src={
+									preview
+										? preview
+										: 'https://todayrecipe.s3.ap-northeast-2.amazonaws.com/defaultImage.png'
+								}
+							/>
+						</label>
+						<input
+							style={{ display: 'none' }}
+							type='file'
+							ref={fileInput}
+							onChange={filePreview}
+							id='fileUpload'
+						/>
 						<Grid>
-							<Text fs='28px' fw="600" mg="20px 0 10px 0">
+							<Text fs='28px' fw='600' mg='20px 0 10px 0'>
 								제목
 							</Text>
 							<Input
@@ -96,7 +114,7 @@ const ArticleWrite = (props) => {
 							/>
 						</Grid>
 						<Grid>
-							<Text fs='28px' mg='30px 0 10px 0' fw="600">
+							<Text fs='28px' mg='30px 0 10px 0' fw='600'>
 								레시피
 							</Text>
 							<Input
@@ -118,7 +136,6 @@ const ArticleWrite = (props) => {
 		</React.Fragment>
 	);
 };
-
 
 const Box = styled.div`
 	width: 70vw;
@@ -143,7 +160,7 @@ const BtnBox = styled.div`
 `;
 
 const Container = styled.div`
-    margin-top: 50px;
+	margin-top: 50px;
 	width: 100%;
 	height: calc(100vh - 150px);
 	display: flex;

@@ -4,7 +4,11 @@ import styled from 'styled-components';
 // redux & api
 import { useDispatch, useSelector } from 'react-redux';
 import { __getComments } from '../modules/comment';
-import { __loadAarticles, __loadAarticleGetId } from '../modules/article';
+import {
+	__loadAarticles,
+	__loadAarticleGetId,
+	__delArticle,
+} from '../modules/article';
 
 // compo
 import Template from '../components/Template';
@@ -16,9 +20,11 @@ import CommentForm from '../components/CommentForm';
 import { Flex, Text, Button } from '../elem';
 
 const Article = ({ history, match }) => {
+	// 1개의 페이지
 	const article = useSelector((store) => store.article.article);
 	const comments = useSelector((store) => store.comment.comments);
 	const dispatch = useDispatch();
+
 	const {
 		params: { id },
 	} = match;
@@ -57,7 +63,11 @@ const Article = ({ history, match }) => {
 									large
 									primary
 									_onClick={() => {
-										history.push('/');
+										const result =
+											window.confirm('정말 이 레시피를 삭제할까요?');
+										if (result) {
+											dispatch(__delArticle(id));
+										}
 									}}
 								>
 									삭제
@@ -111,9 +121,9 @@ const Article = ({ history, match }) => {
 							<Button primary>좋아요 {article.isLikeCnt}</Button>
 						</Flex>
 					</Main>
-					{/* {comments.map((comment) => (
+					{comments.map((comment) => (
 						<Comments comment={comment} key={comment.id} />
-					))} */}
+					))}
 				</Contents>
 				<CommentForm id={id} />
 				<List history={history} />

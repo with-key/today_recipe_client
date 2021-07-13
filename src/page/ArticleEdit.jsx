@@ -3,10 +3,16 @@ import { apis } from '../shared/api';
 import styled from 'styled-components';
 import { Text, Input, Button } from '../elem';
 import Template from '../components/Template';
+import { __editArticle } from '../modules/article';
+import { useDispatch } from 'react-redux';
 
 const ArticleEdit = ({ match, history }) => {
-	const [title, setTitle] = useState('');
-	const [content, setContent] = useState('');
+	const [contents, setContents] = useState({
+		title: '',
+		content: '',
+		imageUrl: '',
+	});
+	const dispatch = useDispatch();
 
 	const {
 		params: { id },
@@ -15,9 +21,10 @@ const ArticleEdit = ({ match, history }) => {
 	useEffect(() => {
 		const fetchArticle = async () => {
 			try {
-				const { data } = await apis.article(id);
-				setTitle(data.title);
-				setContent(data.content);
+				const {
+					data: { title, content, imageUrl },
+				} = await apis.article(id);
+				setContents({ title, content, imageUrl });
 			} catch (e) {
 				console.log(`아티클 불러오기 오류 : ${e}`);
 			}
@@ -35,10 +42,10 @@ const ArticleEdit = ({ match, history }) => {
 								제목
 							</Text>
 							<Input
-								_value={title}
+								_value={contents.title}
 								label='오늘의 레시피 제목을 작성해주세요!'
 								_onChange={(e) => {
-									setTitle(e.target.value);
+									setContents({ ...contents, title: e.target.value });
 								}}
 							/>
 						</Grid>
@@ -47,11 +54,11 @@ const ArticleEdit = ({ match, history }) => {
 								레시피
 							</Text>
 							<Input
-								_value={content}
+								_value={contents.content}
 								multiLine
 								label='선정하신 요리의 레시피를 작성해주세요!'
 								_onChange={(e) => {
-									setContent(e.target.value);
+									setContents({ ...contents, content: e.target.value });
 								}}
 							/>
 						</Grid>
@@ -65,7 +72,16 @@ const ArticleEdit = ({ match, history }) => {
 							>
 								이전으로
 							</Button>
-							<Button primary large>
+							<Button
+								primary
+								large
+								_onClick={() => {
+									const result = window.confirm('정말 이 레시피를 수정할까요?');
+									if (result) {
+										dispatch(__editArticle(id, contents));
+									}
+								}}
+							>
 								수정완료
 							</Button>
 						</BtnBox>
