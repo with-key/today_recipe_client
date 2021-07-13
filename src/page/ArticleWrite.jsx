@@ -58,16 +58,16 @@ const ArticleWrite = (props) => {
         const promise = upload.promise();
 
         promise.then((data) => {
-            dispatch(imageCreators.imageUpload(data.Location))
+            dispatch(imageCreators.imageUpload(data.Location));
+			const content = {
+				...contents,
+				imageUrl: data.Location
+			}
+			dispatch(articleActions.addArticleDB(content));
         }).catch((err) => {
             window.alert("이미지 업로드에 문제가 있어요!",err)
         })
     }
-
-	const WriteSucces = () => {
-        selectFile()
-		dispatch(articleActions.addArticleDB(contents));
-	};
 
 	return (
 		<React.Fragment>
@@ -75,7 +75,7 @@ const ArticleWrite = (props) => {
 				<Container>
 					<Box>
                         <Text fs="20px" mg="0 0 10px 0" fw="600">이미지 업로드</Text>
-                        <label style={{}}for="fileUpload">
+                        <label style={{}} htmlFor="fileUpload">
                         <Image shape="rectangle" src={preview? preview: "https://todayrecipe.s3.ap-northeast-2.amazonaws.com/defaultImage.png"}/></label>
                         <input style={{display:"none"}} type="file" ref={fileInput} onChange={filePreview} id="fileUpload"/>
 						<Grid>
@@ -102,7 +102,7 @@ const ArticleWrite = (props) => {
 							/>
 						</Grid>
 						<BtnBox>
-							<Button primary large _onClick={WriteSucces}>
+							<Button primary large _onClick={selectFile}>
 								작성완료
 							</Button>
 						</BtnBox>

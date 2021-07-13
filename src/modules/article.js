@@ -1,7 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { apis } from '../shared/api';
-import { useSelector } from 'react-redux';
 import { imageCreators } from './image';
 
 // action
@@ -33,14 +32,8 @@ export const __loadAarticles =
 		}
 	};
 
-const addArticleDB = (contents) => {
+export const addArticleDB = (content) => {
 	return function (dispatch, getState, { history }) {
-		const imageUrl = getState().image.imageUrl;
-		const content = {
-			...contents,
-			imageUrl: imageUrl,
-		};
-
 		apis
 			.add(content)
 			.then(() => {

@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { deleteCookie, setCookie } from '../shared/Cookie';
-import { apis, login } from '../shared/api';
+import { apis } from '../shared/api';
 
 // action
 const LOGIN = 'user/LOGIN';
@@ -17,13 +17,13 @@ const initialState = {
 	is_login: false,
 };
 
+// Thunk function
 const registerDB = (id, email, pw, pwcheck) => {
 	return function (dispatch, getState, { history }) {
 		apis
 			.signup(id, email, pw, pwcheck)
-			.then(() => {
-				dispatch(setLogin({ id: id }));
-				history.push('/');
+			.then((res) => {
+				history.push('/login');
 			})
 			.catch((err) => {
 				console.log(err);
@@ -31,42 +31,26 @@ const registerDB = (id, email, pw, pwcheck) => {
 	};
 };
 
-// Thunk function
-// const setLoginDB = (id, pwd) => {
-// 	return function (dispatch, getState, { history }) {
-// 		console.log(id, pwd);
-// 		apis
-// 			.login(id, pwd)
-// 			.then((res) => {
-// 				setCookie('is_login', 'true', 5);
-// 				console.log(res);
-// 				dispatch(setLogin({ id, pwd }));
-// 				history.replace('/');
-// 			})
-// 			.catch((err) => {
-// 				console.log(err);
-// 			});
-// 	};
-// };
-
-const setLoginDB =
-	(id, pwd) =>
-	async (dispatch, getState, { history }) => {
-		console.log(id, pwd);
-		try {
-			const data = await apis.login(id, pwd);
-		} catch (e) {
-			console.log(e);
-		}
+const setLoginDB = (id, pwd) => {
+	return function (dispatch, getState, { history }) {
+		apis
+			.login(id, pwd)
+			.then((res) => {
+				setCookie('token', res.data, 7);
+				dispatch(setLogin({ id: id }));
+				history.replace('/');
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
+};
 
 const logOutDB = () => {
 	return function (dispatch, getState, { history }) {
-		apis.logout().then(() => {
-			deleteCookie('is_login');
-			dispatch(logOut());
-			history.push('/');
-		});
+		deleteCookie('token');
+		dispatch(logOut());
+		history.push('/');
 	};
 };
 
@@ -76,12 +60,10 @@ export default handleActions(
 		[LOGIN]: (state, action) =>
 			produce(state, (draft) => {
 				draft.user = action.payload.user;
-				draft.is_login = true;
 			}),
 		[LOGOUT]: (state, action) =>
 			produce(state, (draft) => {
 				draft.user = null;
-				draft.is_login = false;
 			}),
 	},
 	initialState,
