@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { history } from '../modules/configStore';
 
 import { userCreators } from '../modules/user';
@@ -12,9 +12,9 @@ import { Logo, Button, Flex } from '../elem';
 
 const Header = (props) => {
 	const dispatch = useDispatch();
-	const is_login = useSelector((state) => state.user.is_login);
+	const is_token = document.cookie;
 
-	if (is_login) {
+	if (is_token) {
 		return (
 			<Container>
 				<Logo history={history} />

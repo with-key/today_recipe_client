@@ -21,11 +21,8 @@ const registerDB = (id, email, pw, pwcheck) => {
 	return function (dispatch, getState, { history }) {
 		apis
 			.signup(id, email, pw, pwcheck)
-			.then(() => {
-				dispatch(
-					setLogin({id: id}),
-				);
-				history.push('/');
+			.then((res) => {
+				history.push('/login');
 			})
 			.catch((err) => {
 				console.log(err);
@@ -39,8 +36,7 @@ const setLoginDB = (id, pwd) => {
 		apis
 		.login(id,pwd)
 		.then((res) => {
-			setCookie('is_login', 'true', 5);
-			console.log(res)
+			setCookie('token',res.data,7);
 			dispatch(setLogin({id: id,}));
 			history.replace('/');
 		}).catch(err => {
@@ -51,13 +47,9 @@ const setLoginDB = (id, pwd) => {
 
 const logOutDB = () => {
 	return function (dispatch, getState, { history }) {
-		apis
-		.logout()
-		.then(() => {
-			deleteCookie('is_login');
+			deleteCookie('token');
 			dispatch(logOut());
 			history.push('/');
-		})
 	};
 };
 
@@ -67,12 +59,10 @@ export default handleActions(
 		[LOGIN]: (state, action) =>
 			produce(state, (draft) => {
 				draft.user = action.payload.user;
-				draft.is_login = true;
 			}),
 		[LOGOUT]: (state, action) =>
 			produce(state, (draft) => {
 				draft.user = null;
-				draft.is_login = false;
 			}),
 	},
 	initialState,
