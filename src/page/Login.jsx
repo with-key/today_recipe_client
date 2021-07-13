@@ -13,7 +13,6 @@ const Login = (props) => {
 	const dispatch = useDispatch();
 	const [id, setId] = useState('');
 	const [pw, setPw] = useState('');
-
 	const login = () => {
 		dispatch(userCreators.setLoginDB(id, pw));
 	};
@@ -46,7 +45,7 @@ const Login = (props) => {
 						로그인하기
 					</Button>
 					<Button
-						_onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=da65b296da95167e0361d5f5a2190a46&redirect_uri=http://code-angler.shop/user/kakao/callback&response_type=code'"
+						_onClick={() => {window.location.href='https://kauth.kakao.com/oauth/authorize?client_id=da65b296da95167e0361d5f5a2190a46&redirect_uri=http://code-angler.shop/user/kakao/callback&response_type=code'}}
 						yellow
 						width='360px'
 					>

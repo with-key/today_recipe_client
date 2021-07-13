@@ -36,8 +36,6 @@ const setLoginDB = (id, pwd) => {
 		apis
 			.login(id, pwd)
 			.then((res) => {
-				console.log(res.data[0].username);
-				console.log(res.data[1].token);
 				setCookie('token', res.data[1].token, 7);
 				setCookie('username',res.data[0].username, 7);
 				dispatch(setLogin({ id: id }));
