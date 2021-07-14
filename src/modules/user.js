@@ -57,6 +57,18 @@ const logOutDB = () => {
 	};
 };
 
+const loginCheckDB = () => {
+	return function(dispatch, getState, {history}){
+		const userId = localStorage.getItem('username')
+		const tokenCheck = document.cookie;
+		if(tokenCheck) {
+			dispatch(setLogin({id: userId}))
+		} else {
+			dispatch(logOut());
+		}
+	};
+};
+
 // reducer
 export default handleActions(
 	{
@@ -77,6 +89,7 @@ const userCreators = {
 	setLoginDB,
 	registerDB,
 	logOutDB,
+	loginCheckDB,
 };
 
 export { userCreators };
