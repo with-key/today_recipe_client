@@ -36,6 +36,7 @@ const ArticleWrite = (props) => {
 	});
 
 	const fileInput = React.useRef();
+	console.log(fileInput);
 
 	const filePreview = () => {
 		const reader = new FileReader();
@@ -48,7 +49,6 @@ const ArticleWrite = (props) => {
 	};
 
 	const preview = useSelector((state) => state.image.preview);
-
 	const selectFile = () => {
 		const date = new Date();
 		const file = fileInput.current.files[0];
@@ -75,6 +75,10 @@ const ArticleWrite = (props) => {
 			.catch((err) => {
 				window.alert('이미지 업로드에 문제가 있어요!', err);
 			});
+	};
+
+	const withoutImgPost = () => {
+		dispatch(articleActions.addArticleDB(content));
 	};
 
 	return (
@@ -126,7 +130,11 @@ const ArticleWrite = (props) => {
 							/>
 						</Grid>
 						<BtnBox>
-							<Button primary large _onClick={selectFile}>
+							<Button
+								primary
+								large
+								_onClick={fileInput ? selectFile : withoutImgPost}
+							>
 								작성완료
 							</Button>
 						</BtnBox>

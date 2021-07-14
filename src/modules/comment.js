@@ -30,8 +30,9 @@ export const __addComment =
 	async (dispatch, getState, { history }) => {
 		try {
 			console.log(id, content);
-			await apis.addComment(id, content);
-			dispatch(addComment(content));
+			const { data } = await apis.addComment(id, content);
+			console.log(data);
+			dispatch(addComment(data));
 		} catch (e) {}
 	};
 
