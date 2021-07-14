@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { searchArticleDB } from '../modules/article';
 
 const Search = () => {
 	const [term, setTerm] = useState('');
+	const dispatch = useDispatch();
+
 	return (
 		<Container>
 			<XIcon
@@ -17,6 +21,11 @@ const Search = () => {
 				placeholder='오늘 점심을 뭘 먹을까?'
 				onChange={(e) => {
 					setTerm(e.target.value);
+				}}
+				onKeyPress={(e) => {
+					if(e.key === 'Enter'){
+						dispatch(searchArticleDB(term));
+					}
 				}}
 			/>
 		</Container>
