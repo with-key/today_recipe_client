@@ -10,6 +10,7 @@ const api = axios.create({
 	},
 });
 
+<<<<<<< HEAD
 const loginapi = axios.create({
 	baseURL: 'http://3.34.140.51',
 	headers: {
@@ -18,6 +19,8 @@ const loginapi = axios.create({
 	},
 });
 
+=======
+>>>>>>> 5d14f39a567b52757402e8a6a66c08166519da47
 export const apis = {
 	// article
 	add: (contents) => api.post('/api/articles', contents),
@@ -36,8 +39,12 @@ export const apis = {
 		api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
 	// user
+<<<<<<< HEAD
 	login: (id, pw) =>
 		loginapi.post('/user/login', { username: id, password: pw }),
+=======
+	login: (id, pw) => api.post('/user/login', { username: id, password: pw }),
+>>>>>>> 5d14f39a567b52757402e8a6a66c08166519da47
 	signup: (id, email, pw, pwcheck) =>
 		api.post('/user/signup', {
 			username: id,

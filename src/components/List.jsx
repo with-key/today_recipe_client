@@ -5,7 +5,6 @@ import { Row, Button, Text } from '../elem';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
-	console.log(articles);
 	return (
 		<Container>
 			<Title>

@@ -44,7 +44,6 @@ export const __loadAarticles =
 
 export const addArticleDB = (content) => {
 	return function (dispatch, getState, { history }) {
-		console.log(content);
 		apis
 			.add(content)
 			.then(() => {
