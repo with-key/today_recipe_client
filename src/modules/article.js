@@ -46,12 +46,13 @@ export const addArticleDB = (content) => {
 		apis
 			.add(content)
 			.then(() => {
+				console.log(content);
 				dispatch(addArticle(content));
 				history.push('/');
 				dispatch(imageCreators.setPreview(null));
 			})
 			.catch((err) => {
-				window.alert("로그인한 회원만 작성할 수 있습니다!")
+				window.alert('로그인한 회원만 작성할 수 있습니다!');
 				console.log(err);
 			});
 	};

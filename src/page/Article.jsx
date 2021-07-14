@@ -122,7 +122,7 @@ const Article = ({ history, match }) => {
 						</Flex>
 					</Main>
 					{comments.map((comment) => (
-						<Comments comment={comment} key={comment.id} />
+						<Comments comment={comment} key={comment.id} id={id} />
 					))}
 				</Contents>
 				<CommentForm id={id} />

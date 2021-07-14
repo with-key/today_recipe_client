@@ -4,10 +4,12 @@ import { apis } from '../shared/api';
 // action
 const ADD = 'comment/ADD';
 const LOAD = 'comment/LOAD';
+const DELETE = 'comment/DELETE';
 
 // action creator
 const addComment = createAction(ADD, (comment) => ({ comment }));
 const getComments = createAction(LOAD, (comment) => ({ comment }));
+const delComment = createAction(DELETE, (coId) => ({ coId }));
 
 // initialState
 const initialState = {
@@ -16,12 +18,20 @@ const initialState = {
 };
 
 // Thunk function
+export const __delComment = (id, coId) => (dispatch) => {
+	try {
+		// console.log('delete ok?');
+		apis.delComment(id, coId);
+		dispatch(delComment(coId));
+	} catch (e) {}
+};
 export const __addComment =
 	(id, content) =>
 	async (dispatch, getState, { history }) => {
 		try {
-			const data = await apis.addComment(id, content);
-			console.log(data);
+			console.log(id, content);
+			await apis.addComment(id, content);
+			dispatch(addComment(content));
 		} catch (e) {}
 	};
 
@@ -40,14 +50,24 @@ export const __getComments =
 export default handleActions(
 	{
 		[ADD]: (state, action) => {
+			console.log(action);
 			return {
 				...state,
+				comments: state.comments.concat(action.payload.comment),
 			};
 		},
 		[LOAD]: (state, action) => {
 			return {
 				...state,
 				comments: action.payload.comment,
+			};
+		},
+		[DELETE]: (state, action) => {
+			return {
+				...state,
+				comments: state.comments.filter(
+					(comment) => comment.id !== action.payload.coId,
+				),
 			};
 		},
 	},

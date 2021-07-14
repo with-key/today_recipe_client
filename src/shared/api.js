@@ -19,13 +19,10 @@ export const apis = {
 	article: (id) => api.get(`/api/articles/${id}`),
 
 	// comment
-	addComment: (comment) => api.post('/comments', comment),
-	comments: (id) =>
-		api.get('/comments/', {
-			params: {
-				postId: id,
-			},
-		}),
+	addComment: (id, content) =>
+		api.post(`/api/articles/${id}/comments`, { content }),
+	comments: (id) => api.get(`/api/articles/${id}/comments`),
+	delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
 
 	// user
 	login: (id, pw) => api.post('/user/login', { username: id, password: pw }),

@@ -1,8 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Flex } from '../elem';
 
 const Footer = () => {
-	return <Container>Copyright 2021 &copy; 오늘의레피시</Container>;
+	return (
+		<Container>
+			<Flex between>
+				<div>Copyright 2021 &copy; 오늘의레피시</div>
+				<div>v 1.0.0</div>
+			</Flex>
+		</Container>
+	);
 };
 
 const Container = styled.footer`
