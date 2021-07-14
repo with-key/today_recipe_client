@@ -20,15 +20,16 @@ import CommentForm from '../components/CommentForm';
 import { Flex, Text, Button } from '../elem';
 
 const Article = ({ history, match }) => {
-	// 1개의 페이지
-	const article = useSelector((store) => store.article.article);
-	const comments = useSelector((store) => store.comment.comments);
 	const dispatch = useDispatch();
+	const article = useSelector((store) => store.article.article);
+	console.log(article);
+	const comments = useSelector((store) => store.comment.comments);
+	const username = useSelector((store) => store.user.user);
+	// console.log(username.id);
 
 	const {
 		params: { id },
 	} = match;
-	console.log(id);
 
 	useEffect(() => {
 		dispatch(__loadAarticles());
@@ -50,28 +51,30 @@ const Article = ({ history, match }) => {
 								{article.title}
 							</Text>
 							<Flex gap='10px'>
-								<Button
-									large
-									primary
-									_onClick={() => {
-										history.push(`/article/${id}/edit`);
-									}}
-								>
-									수정
-								</Button>
-								<Button
-									large
-									primary
-									_onClick={() => {
-										const result =
-											window.confirm('정말 이 레시피를 삭제할까요?');
-										if (result) {
-											dispatch(__delArticle(id));
-										}
-									}}
-								>
-									삭제
-								</Button>
+								<>
+									<Button
+										large
+										primary
+										_onClick={() => {
+											history.push(`/article/${id}/edit`);
+										}}
+									>
+										수정
+									</Button>
+									<Button
+										large
+										primary
+										_onClick={() => {
+											const result =
+												window.confirm('정말 이 레시피를 삭제할까요?');
+											if (result) {
+												dispatch(__delArticle(id));
+											}
+										}}
+									>
+										삭제
+									</Button>
+								</>
 								<Button
 									large
 									primary

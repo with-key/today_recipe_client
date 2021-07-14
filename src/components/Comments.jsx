@@ -5,12 +5,10 @@ import { __delComment, __editComment } from '../modules/comment';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Comments = ({ comment, id }) => {
+	const dispatch = useDispatch();
 	const [editMode, setEditMode] = useState(false);
 	const [newContent, setNewContent] = useState(comment.content);
-
-	const dispatch = useDispatch();
-	const user = useSelector((store) => store);
-	console.log(user);
+	const username = useSelector((store) => store.user.user.id);
 
 	if (editMode) {
 		return (
@@ -80,27 +78,31 @@ const Comments = ({ comment, id }) => {
 						{comment.content}
 					</Text>
 				</Desc>
-				<Flex right gap='10px' mg='10px 0'>
-					<Button
-						small
-						_onClick={() => {
-							setEditMode(!editMode);
-						}}
-					>
-						수정
-					</Button>
-					<Button
-						small
-						_onClick={() => {
-							const result = window.confirm('댓글을 정말 삭제할까요?');
-							if (result) {
-								dispatch(__delComment(id, comment.id));
-							}
-						}}
-					>
-						삭제
-					</Button>
-				</Flex>
+				{/*  */}
+				{username === comment.commentAuthor && (
+					<Flex right gap='10px' mg='10px 0'>
+						<Button
+							small
+							_onClick={() => {
+								setEditMode(!editMode);
+							}}
+						>
+							수정
+						</Button>
+						<Button
+							small
+							_onClick={() => {
+								const result = window.confirm('댓글을 정말 삭제할까요?');
+								if (result) {
+									dispatch(__delComment(id, comment.id));
+								}
+							}}
+						>
+							삭제
+						</Button>
+					</Flex>
+				)}
+				{/*  */}
 			</Main>
 		</Container>
 	);
