@@ -26,6 +26,7 @@ const registerDB = (id, email, pw, pwcheck) => {
 				history.push('/login');
 			})
 			.catch((err) => {
+				window.alert("이미 존재하는 아이디입니다.");
 				console.log(err);
 			});
 	};
