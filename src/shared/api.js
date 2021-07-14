@@ -10,6 +10,14 @@ const api = axios.create({
 	},
 });
 
+const loginapi = axios.create({
+	baseURL: 'http://3.34.140.51',
+	headers: {
+		'content-type': 'application/json;charset=UTF-8',
+		accept: 'application/json,'
+	},
+});
+
 export const apis = {
 	// article
 	add: (contents) => api.post('/api/articles', contents),
@@ -17,6 +25,7 @@ export const apis = {
 	del: (id) => api.delete(`api/articles/${id}`),
 	articles: () => api.get('/api/articles'),
 	article: (id) => api.get(`/api/articles/${id}`),
+	search: (value) => api.get(`/api/articles/search?query=${value}`),
 
 	// comment
 	addComment: (id, content) =>
@@ -25,7 +34,7 @@ export const apis = {
 	delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
 
 	// user
-	login: (id, pw) => api.post('/user/login', { username: id, password: pw }),
+	login: (id, pw) => loginapi.post('/user/login', { username: id, password: pw }),
 	signup: (id, email, pw, pwcheck) =>
 		api.post('/user/signup', {
 			username: id,
