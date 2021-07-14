@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Flex, Text, Button } from '../elem';
-import { __delComment } from '../modules/comment';
+import { __delComment, __editComment } from '../modules/comment';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Comments = ({ comment, id }) => {
-	const [editMode, setEditMode] = useState(true);
-	const [newContent, setNewContent] = useState('');
+	const [editMode, setEditMode] = useState(false);
+	const [newContent, setNewContent] = useState(comment.content);
 
 	const dispatch = useDispatch();
-	// const user = useSelector((store) => console.log(store));
+	const user = useSelector((store) => store);
+	console.log(user);
 
 	if (editMode) {
 		return (
@@ -27,14 +28,33 @@ const Comments = ({ comment, id }) => {
 							</Flex>
 						</Flex>
 					</Info>
-					<Desc>
-						<Text fs='16px' color='#333' lh='150%'>
-							{comment.content}
-						</Text>
-					</Desc>
+					<div>
+						<CommentInput
+							value={newContent}
+							onChange={(e) => {
+								setNewContent(e.target.value);
+							}}
+						/>
+					</div>
 					<Flex right gap='10px' mg='10px 0'>
-						<Button small>취소</Button>
-						<Button small>완료</Button>
+						<Button
+							small
+							_onClick={() => {
+								setEditMode(!editMode);
+							}}
+						>
+							취소
+						</Button>
+						<Button
+							small
+							_onClick={() => {
+								dispatch(
+									__editComment(id, comment.id, newContent, setEditMode),
+								);
+							}}
+						>
+							완료
+						</Button>
 					</Flex>
 				</Main>
 			</Container>
@@ -64,7 +84,7 @@ const Comments = ({ comment, id }) => {
 					<Button
 						small
 						_onClick={() => {
-							console.log('연결');
+							setEditMode(!editMode);
 						}}
 					>
 						수정
@@ -85,6 +105,21 @@ const Comments = ({ comment, id }) => {
 		</Container>
 	);
 };
+
+const CommentInput = styled.textarea`
+	width: 100%;
+	height: 100px;
+	resize: none;
+	font-size: 16px;
+	line-height: 150%;
+	padding: 12px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	outline: none;
+	&:focus {
+		border: 3px solid #ff6b6b;
+	}
+`;
 
 const Container = styled.div`
 	margin-left: auto;

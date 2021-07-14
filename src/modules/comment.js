@@ -5,11 +5,16 @@ import { apis } from '../shared/api';
 const ADD = 'comment/ADD';
 const LOAD = 'comment/LOAD';
 const DELETE = 'comment/DELETE';
+const EDIT = 'comment/EDIT';
 
 // action creator
 const addComment = createAction(ADD, (comment) => ({ comment }));
 const getComments = createAction(LOAD, (comment) => ({ comment }));
 const delComment = createAction(DELETE, (coId) => ({ coId }));
+const editComment = createAction(EDIT, (coId, newContent) => ({
+	coId,
+	newContent,
+}));
 
 // initialState
 const initialState = {
@@ -18,9 +23,16 @@ const initialState = {
 };
 
 // Thunk function
+export const __editComment =
+	(id, coId, newContent, setEditMode) => async (dispatch) => {
+		console.log(id, coId, newContent);
+		const data = await apis.editComment(id, coId, newContent);
+		console.log(data);
+		setEditMode(false);
+	};
+
 export const __delComment = (id, coId) => (dispatch) => {
 	try {
-		// console.log('delete ok?');
 		apis.delComment(id, coId);
 		dispatch(delComment(coId));
 	} catch (e) {}
