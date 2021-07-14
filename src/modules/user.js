@@ -80,6 +80,7 @@ export default handleActions(
 		[LOGOUT]: (state, action) =>
 			produce(state, (draft) => {
 				draft.user = null;
+				draft.is_login = false;
 			}),
 	},
 	initialState,
