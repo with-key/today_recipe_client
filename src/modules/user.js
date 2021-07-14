@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { deleteCookie, setCookie } from '../shared/Cookie';
 import { apis } from '../shared/api';
+import axios from 'axios';
 
 // action
 const LOGIN = 'user/LOGIN';
@@ -37,10 +38,12 @@ const setLoginDB = (id, pwd) => {
 		apis
 			.login(id, pwd)
 			.then((res) => {
+				axios.defaults.headers.common['X-AUTH-TOKEN'] = ` ${res.data[1].token}`;
 				setCookie('token', res.data[1].token, 7);
 				localStorage.setItem('username', res.data[0].username);
 				dispatch(setLogin({ id: id }));
 				history.push('/');
+				// window.location.reload();
 			})
 			.catch((err) => {
 				console.log(err);
