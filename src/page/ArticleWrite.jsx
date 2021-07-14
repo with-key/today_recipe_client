@@ -53,6 +53,11 @@ const ArticleWrite = (props) => {
 		const date = new Date();
 		const file = fileInput.current.files[0];
 
+		if(!file){
+			window.alert("이미지를 업로드해주세요");
+			return;
+		}
+
 		const upload = new AWS.S3.ManagedUpload({
 			params: {
 				Bucket: 'todayrecipe',
@@ -60,6 +65,7 @@ const ArticleWrite = (props) => {
 				Body: file,
 			},
 		});
+
 
 		const promise = upload.promise();
 
