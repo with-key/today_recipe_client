@@ -20,7 +20,6 @@ const editArticle = createAction(EDIT, (id, newArticle) => ({
 	newArticle,
 }));
 
-const delArticle = createAction(DELETE, (id) => ({ id }));
 const searchArticle = createAction(SEARCH, (articles) => ({ articles }));
 
 // initialState

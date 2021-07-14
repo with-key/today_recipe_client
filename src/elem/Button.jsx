@@ -18,6 +18,12 @@ Button.defaultProps = {
 
 const BtnBx = styled.button`
 	${(props) =>
+		props.disabled &&
+		css`
+			background-color: #ddd !important;
+			cursor: not-allowed !important;
+		`}
+	${(props) =>
 		props.full
 			? css`
 					width: 100%;

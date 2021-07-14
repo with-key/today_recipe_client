@@ -13,6 +13,7 @@ const Login = (props) => {
 	const dispatch = useDispatch();
 	const [id, setId] = useState('');
 	const [pw, setPw] = useState('');
+
 	const login = () => {
 		dispatch(userCreators.setLoginDB(id, pw));
 	};

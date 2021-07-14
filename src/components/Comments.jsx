@@ -8,7 +8,8 @@ const Comments = ({ comment, id }) => {
 	const dispatch = useDispatch();
 	const [editMode, setEditMode] = useState(false);
 	const [newContent, setNewContent] = useState(comment.content);
-	const username = useSelector((store) => store.user.user.id);
+	const username = useSelector((store) => store.user.user);
+	const isLogin = useSelector((store) => store.user.is_login);
 
 	if (editMode) {
 		return (
@@ -78,8 +79,7 @@ const Comments = ({ comment, id }) => {
 						{comment.content}
 					</Text>
 				</Desc>
-				{/*  */}
-				{username === comment.commentAuthor && (
+				{isLogin && username.id === comment.commentAuthor ? (
 					<Flex right gap='10px' mg='10px 0'>
 						<Button
 							small
@@ -101,8 +101,9 @@ const Comments = ({ comment, id }) => {
 							삭제
 						</Button>
 					</Flex>
+				) : (
+					''
 				)}
-				{/*  */}
 			</Main>
 		</Container>
 	);

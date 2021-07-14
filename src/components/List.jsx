@@ -5,11 +5,14 @@ import { Row, Button, Text } from '../elem';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
+	const isLogin = useSelector((store) => store.user.is_login);
+
 	return (
 		<Container>
 			<Title>
 				<H1>엄선한 오늘의 레시피!</H1>
 				<Button
+					disabled={isLogin ? '' : 'disabled'}
 					primary
 					large
 					_onClick={() => {
@@ -46,7 +49,7 @@ const List = ({ history }) => {
 							{articles.length - idx}
 						</Col>
 						<Col width='50%' centerY>
-							{item.title} {item.imageUrl ? '📷' : ''}
+							{item.title}
 						</Col>
 						<Col width='20%' centerY centerX>
 							<Text mg='10px 0'>{item.username}</Text>
@@ -63,9 +66,9 @@ const List = ({ history }) => {
 					</Row>
 				))}
 				<Pagintion>
-					<Button large primary>
+					{/* <Button large primary>
 						더보기
-					</Button>
+					</Button> */}
 				</Pagintion>
 			</ListWrap>
 		</Container>
