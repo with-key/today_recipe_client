@@ -26,6 +26,7 @@ const registerDB = (id, email, pw, pwcheck) => {
 				history.push('/login');
 			})
 			.catch((err) => {
+				window.alert("이미 존재하는 아이디입니다.");
 				console.log(err);
 			});
 	};
@@ -39,7 +40,7 @@ const setLoginDB = (id, pwd) => {
 				setCookie('token', res.data[1].token, 7);
 				localStorage.setItem('username',res.data[0].username);
 				dispatch(setLogin({ id: id }));
-				history.replace('/login');
+				history.replace('/');
 			})
 			.catch((err) => {
 				console.log(err);
