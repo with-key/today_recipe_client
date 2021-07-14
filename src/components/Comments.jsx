@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Flex, Text, Button } from '../elem';
 import { __delComment } from '../modules/comment';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Comments = ({ comment, id }) => {
+	const [editMode, setEditMode] = useState(true);
+	const [newContent, setNewContent] = useState('');
+
 	const dispatch = useDispatch();
 	// const user = useSelector((store) => console.log(store));
+
+	if (editMode) {
+		return (
+			<Container>
+				<Main>
+					<Info>
+						<Flex between>
+							<Text fs='18px' fw='500' color='#333'>
+								{comment.commentAuthor}
+							</Text>
+							<Flex>
+								<Text fs='18px' fw='500' color='gray'>
+									{comment.createdAt}
+								</Text>
+							</Flex>
+						</Flex>
+					</Info>
+					<Desc>
+						<Text fs='16px' color='#333' lh='150%'>
+							{comment.content}
+						</Text>
+					</Desc>
+					<Flex right gap='10px' mg='10px 0'>
+						<Button small>취소</Button>
+						<Button small>완료</Button>
+					</Flex>
+				</Main>
+			</Container>
+		);
+	}
 	return (
 		<Container>
 			<Main>
