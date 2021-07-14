@@ -9,6 +9,7 @@ const LOAD_ID = 'article/LOAD_Id';
 const ADD_ARTICLE = 'article/ADD_ARTICLE';
 const EDIT = 'article/EDIT';
 const DELETE = 'article/DELETE';
+const SEARCH = 'article/SEARCH';
 
 // action creator
 const loadAarticles = createAction(LOAD, (articles) => ({ articles }));
@@ -20,6 +21,7 @@ const editArticle = createAction(EDIT, (id, newArticle) => ({
 }));
 
 const delArticle = createAction(DELETE, (id) => ({ id }));
+const searchArticle = createAction(SEARCH, (articles) => ({articles}));
 
 // initialState
 const initialState = {
@@ -57,6 +59,19 @@ export const addArticleDB = (content) => {
 			});
 	};
 };
+
+export const searchArticleDB = (value) => {
+	return function (dispatch, getState, {history}) {
+		apis
+		.search(value)
+		.then((res) => {
+			console.log(res);
+			dispatch(searchArticle(res.data));
+		}).catch((err) => {
+			console.log(err);
+		})
+	}
+}
 
 export const __loadAarticleGetId =
 	(id) =>
@@ -117,6 +132,10 @@ export default handleActions(
 				// 상태관리할 필요가 없는 것 같다...
 			};
 		},
+		[SEARCH]: (state, action) => produce(state, (draft) => {
+			console.log(action)
+			draft.list = action.payload.articles
+		})
 	},
 	initialState,
 );

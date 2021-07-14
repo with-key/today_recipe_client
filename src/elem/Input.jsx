@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Text } from '.';
 
 const Input = (props) => {
-	const { type, label, placeholder, multiLine, _onChange, _value } = props;
+	const { type, label, placeholder, multiLine, _onChange, _value,_onKeyPress } = props;
 
 	if (multiLine) {
 		return (
@@ -27,6 +27,7 @@ const Input = (props) => {
 				placeholder={placeholder}
 				onChange={_onChange}
 				value={_value}
+				onKeyPress={_onKeyPress}
 			/>
 		</React.Fragment>
 	);
@@ -38,6 +39,7 @@ Input.defaultProps = {
 	placeholder: '',
 	multiLine: false,
 	_onChange: () => {},
+	_onKeyPress: () => {},
 };
 
 const NormalInput = styled.input`
