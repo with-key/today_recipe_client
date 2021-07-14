@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
 import { apis } from '../shared/api';
 
 // action
@@ -26,8 +27,9 @@ const initialState = {
 export const __editComment =
 	(id, coId, newContent, setEditMode) => async (dispatch) => {
 		console.log(id, coId, newContent);
-		const data = await apis.editComment(id, coId, newContent);
+		const { data } = await apis.editComment(id, coId, newContent);
 		console.log(data);
+		dispatch(editComment(coId, data));
 		setEditMode(false);
 	};
 
@@ -83,6 +85,11 @@ export default handleActions(
 				),
 			};
 		},
+		[EDIT]: (state, action) =>
+			produce(state, (draft) => {
+				console.log(action);
+				// draft.comments[]
+			}),
 	},
 	initialState,
 );
