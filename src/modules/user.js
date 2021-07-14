@@ -38,7 +38,6 @@ const setLoginDB = (id, pwd) => {
 		apis
 			.login(id, pwd)
 			.then((res) => {
-				axios.defaults.headers.common['X-AUTH-TOKEN'] = ` ${res.data[1].token}`;
 				setCookie('token', res.data[1].token, 7);
 				localStorage.setItem('username', res.data[0].username);
 				dispatch(setLogin({ id: id }));

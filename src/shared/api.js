@@ -1,14 +1,20 @@
 import axios from 'axios';
 
-const accessToken = document.cookie.split('=')[1];
 const api = axios.create({
 	baseURL: 'http://3.34.140.51',
 	headers: {
 		'content-type': 'application/json;charset=UTF-8',
 		accept: 'application/json,',
-		'X-AUTH-TOKEN': `${accessToken}`,
 	},
 });
+
+api.interceptors.request.use(
+	function(config){
+		const accessToken = document.cookie.split('=')[1];
+		config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
+		return config;
+	},
+);
 
 export const apis = {
 	// article
