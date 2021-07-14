@@ -65,7 +65,6 @@ export const searchArticleDB = (value) => {
 		apis
 		.search(value)
 		.then((res) => {
-			console.log(res);
 			dispatch(searchArticle(res.data));
 		}).catch((err) => {
 			console.log(err);
@@ -133,7 +132,6 @@ export default handleActions(
 			};
 		},
 		[SEARCH]: (state, action) => produce(state, (draft) => {
-			console.log(action)
 			draft.list = action.payload.articles
 		})
 	},
