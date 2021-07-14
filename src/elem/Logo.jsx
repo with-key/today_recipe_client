@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { __loadAarticles } from '../modules/article';
 
 const Logo = ({ history }) => {
+	const dispatch = useDispatch();
 	return (
 		<Container
 			onClick={() => {
-				history.push('/');
+				dispatch(__loadAarticles());
+				history.replace('/');
 			}}
 		>
 			<svg
