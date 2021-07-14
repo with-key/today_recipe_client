@@ -41,10 +41,10 @@ const List = ({ history }) => {
 						작성시간
 					</Col>
 				</ListHeader>
-				{articles.map((item) => (
+				{articles.map((item, idx) => (
 					<Row item={item} key={item.id} history={history}>
 						<Col width='10%' centerY centerX>
-							{item.id}
+							{articles.length - idx}
 						</Col>
 						<Col width='50%' centerY>
 							{item.title} {item.imageUrl ? '📷' : ''}

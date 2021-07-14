@@ -2,19 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { Flex, Text, Button } from '../elem';
 import { __delComment } from '../modules/comment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Comments = ({ comment, id }) => {
 	const dispatch = useDispatch();
-	console.log(id);
-	console.log(comment.id);
+	// const user = useSelector((store) => console.log(store));
 	return (
 		<Container>
 			<Main>
 				<Info>
 					<Flex between>
 						<Text fs='18px' fw='500' color='#333'>
-							{comment.userName}
+							{comment.commentAuthor}
 						</Text>
 						<Flex>
 							<Text fs='18px' fw='500' color='gray'>

@@ -7,7 +7,7 @@ const Footer = () => {
 		<Container>
 			<Flex between>
 				<div>Copyright 2021 &copy; 오늘의레피시</div>
-				<div>v 1.0.0</div>
+				<div>v 1.0.1</div>
 			</Flex>
 		</Container>
 	);
