@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Row = ({ children, item, history }) => {
 	return (
 		<Container
+			key={item.id}
 			onClick={() => {
 				history.push(`/article/${item.id}`);
 			}}

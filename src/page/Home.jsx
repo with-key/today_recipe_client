@@ -26,7 +26,6 @@ const Home = ({ history }) => {
 
 const Container = styled.section`
 	width: 70%;
-	background-color: #fff;
 	border-radius: 10px;
 `;
 export default Home;

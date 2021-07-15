@@ -1,24 +1,83 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Text } from '../elem';
+import { Flex, Text, Git, Velog } from '../elem';
 
 const Footer = () => {
 	return (
 		<Container>
 			<OuterBox>
 				<InnerBox>
-					<Text mg="0 0 10px 0" fs="28px" fw="600">BackEnd</Text>
-					<Text mg="0 0 10px 0">김성경 https://github.com/Code-Angler /// https://velog.io/@code_angler</Text>
-					<Text mg="0 0 10px 0">이태강 https://github.com/BlossomWhale</Text>
-					<Text >전영진 https://github.com/ipinid613 /// https://velog.io/@ipinid613</Text>
+					<Text mg='0 0 10px 0' fs='28px' fw='600'>
+						BackEnd
+					</Text>
+					<Flex gap='10px'>
+						<div>김성경</div>
+						<Git
+							_onClick={() => {
+								window.location.href = 'https://github.com/Code-Angler';
+							}}
+						/>
+						<Velog
+							_onClick={() => {
+								window.location.href = 'https://velog.io/@code_angler';
+							}}
+						/>
+					</Flex>
+					<Flex gap='10px'>
+						<div>이태강</div>
+						<Git
+							_onClick={() => {
+								window.location.href = 'https://github.com/BlossomWhale';
+							}}
+						/>
+					</Flex>
+					<Flex gap='10px'>
+						<div>전영진</div>
+						<Git
+							_onClick={() => {
+								window.location.href = 'https://github.com/ipinid613';
+							}}
+						/>
+						<Velog
+							_onClick={() => {
+								window.location.href = 'https://velog.io/@ipinid613';
+							}}
+						/>
+					</Flex>
 				</InnerBox>
-				<InnerBox style={{marginLeft:"30px"}}>
-					<Text mg="0 0 10px 0" fs="28px" fw="600">FrontEnd</Text>
-					<Text mg="0 0 10px 0">이승규 https://github.com/dltmdrbtjd /// https://velog.io/@dltmdrbsla14</Text>
-					<Text>예상기 https://github.com/with-key /// https://velog.io/@with-key</Text>
+				<InnerBox style={{ marginLeft: '30px' }}>
+					<Text mg='0 0 10px 0' fs='28px' fw='600'>
+						FrontEnd
+					</Text>
+					<Flex gap='10px'>
+						<div>이승규</div>
+						<Git
+							_onClick={() => {
+								window.location.href = 'https://github.com/dltmdrbtjd';
+							}}
+						/>
+						<Velog
+							_onClick={() => {
+								window.location.href = 'https://velog.io/@dltmdrbsla14';
+							}}
+						/>
+					</Flex>
+					<Flex gap='10px'>
+						<div>예상기</div>
+						<Git
+							_onClick={() => {
+								window.location.href = 'https://github.com/with-key';
+							}}
+						/>
+						<Velog
+							_onClick={() => {
+								window.location.href = 'https://velog.io/@with-key';
+							}}
+						/>
+					</Flex>
 				</InnerBox>
 			</OuterBox>
-			<Flex between>
+			<Flex right gap='10px'>
 				<div>Copyright 2021 &copy; 오늘의레피시</div>
 				<div>v 1.0.2</div>
 			</Flex>
@@ -31,9 +90,7 @@ const OuterBox = styled.div`
 	display: flex;
 `;
 
-const InnerBox = styled.div`
-
-`;
+const InnerBox = styled.div``;
 
 const Container = styled.footer`
 	margin-top: 150px;

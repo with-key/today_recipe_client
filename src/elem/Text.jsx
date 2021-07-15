@@ -21,5 +21,6 @@ const TextBx = styled.div`
 	font-weight: ${(props) => props.fw};
 	color: ${(props) => props.color};
 	line-height: ${(props) => props.lh};
+	white-space: ${(props) => props.ws};
 `;
 export default Text;

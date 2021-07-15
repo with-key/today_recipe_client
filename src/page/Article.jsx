@@ -17,7 +17,7 @@ import Comments from '../components/Comments';
 import CommentForm from '../components/CommentForm';
 
 // elem
-import { Flex, Text, Button } from '../elem';
+import { Flex, Text, Button, UserIcon } from '../elem';
 import { dateConvert } from '../util';
 
 const Article = ({ history, match }) => {
@@ -46,6 +46,7 @@ const Article = ({ history, match }) => {
 			<Container>
 				<Contents>
 					<Title>
+						<Text color='#ff6b6b'>글 번호 ({article.id})</Text>
 						<Flex between>
 							<Text fs='40px' mg='20px 0' fw='600'>
 								{article.title}
@@ -54,8 +55,8 @@ const Article = ({ history, match }) => {
 								{isLogin && username.id === article.username ? (
 									<>
 										<Button
-											large
-											primary
+											small
+											outline
 											_onClick={() => {
 												history.push(`/article/${id}/edit`);
 											}}
@@ -63,8 +64,8 @@ const Article = ({ history, match }) => {
 											수정
 										</Button>
 										<Button
-											large
-											primary
+											small
+											outline
 											_onClick={() => {
 												const result =
 													window.confirm('정말 이 레시피를 삭제할까요?');
@@ -80,7 +81,7 @@ const Article = ({ history, match }) => {
 									''
 								)}
 								<Button
-									large
+									small
 									primary
 									_onClick={() => {
 										history.push('/');
@@ -95,7 +96,10 @@ const Article = ({ history, match }) => {
 						<Info>
 							<Flex between>
 								<Text fs='18px' fw='500' color='#333'>
-									{article.username}
+									<Flex center gap='10px'>
+										<UserIcon />
+										{article.username}
+									</Flex>
 								</Text>
 								<Text fs='18px' fw='500' color='gray'>
 									{dateConvert(article.createdAt)}
@@ -103,10 +107,10 @@ const Article = ({ history, match }) => {
 							</Flex>
 						</Info>
 						<Desc>
-							<Flex center mg='20px 0'>
-								<img src={article.imageUrl} alt='img'></img>
+							<Flex center mg='20px 0 100px 0'>
+								<Image src={article.imageUrl} alt='img' />
 							</Flex>
-							<Text fs='16px' color='#333' lh='150%'>
+							<Text fs='16px' color='#333' lh='150%' ws='pre-wrap'>
 								{article.content}
 							</Text>
 						</Desc>
@@ -121,6 +125,11 @@ const Article = ({ history, match }) => {
 		</Template>
 	);
 };
+
+const Image = styled.img`
+	width: 50%;
+	border-radius: 8px;
+`;
 
 const Desc = styled.div`
 	width: 100%;

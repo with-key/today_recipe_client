@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Text, Input, Button, Image } from '../elem';
 import Template from '../components/Template';
 import { __editArticle } from '../modules/article';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Auth from '../util/Auth';
 import { imageCreators } from '../modules/image';
 
@@ -17,7 +17,7 @@ const ArticleEdit = ({ match, history }) => {
 		content: '',
 		imageUrl: '',
 	});
-	
+
 	const dispatch = useDispatch();
 
 	const {
@@ -69,7 +69,7 @@ const ArticleEdit = ({ match, history }) => {
 					...contents,
 					imageUrl: data.Location,
 				};
-				dispatch(__editArticle(id,content));
+				dispatch(__editArticle(id, content));
 			})
 			.catch((err) => {
 				window.alert('이미지 업로드에 문제가 있어요!', err);
@@ -96,31 +96,12 @@ const ArticleEdit = ({ match, history }) => {
 			<Template>
 				<Container>
 					<Box>
-						<Text fs='20px' mg='0 0 10px 0' fw='600'>
-							이미지 업로드
-						</Text>
-						<label style={{}} htmlFor='fileUpload'>
-							<Image
-								shape='rectangle'
-								src={
-									preview
-										? preview
-										: contents.imageUrl
-								}
-							/>
-						</label>
-						<input
-							style={{ display: 'none' }}
-							type='file'
-							ref={fileInput}
-							onChange={filePreview}
-							id='fileUpload'
-						/>
 						<Grid>
 							<Text fs='20px' mg='10px 0 10px 0' fw='600'>
 								제목
 							</Text>
 							<Input
+								hei='50px;'
 								_value={contents.title}
 								label='오늘의 레시피 제목을 작성해주세요!'
 								_onChange={(e) => {
@@ -141,6 +122,30 @@ const ArticleEdit = ({ match, history }) => {
 								}}
 							/>
 						</Grid>
+						<Grid
+							style={{
+								borderTop: '1px solid #ddd',
+								marginTop: '50px',
+								paddingTop: '30px',
+							}}
+						>
+							<Text fs='20px' mg='0 0 10px 0' fw='600'>
+								이미지 업로드
+							</Text>
+							<label style={{}} htmlFor='fileUpload'>
+								<Image
+									shape='rectangle'
+									src={preview ? preview : contents.imageUrl}
+								/>
+							</label>
+							<input
+								style={{ display: 'none' }}
+								type='file'
+								ref={fileInput}
+								onChange={filePreview}
+								id='fileUpload'
+							/>
+						</Grid>
 						<BtnBox>
 							<Button
 								primary
@@ -157,7 +162,7 @@ const ArticleEdit = ({ match, history }) => {
 								_onClick={() => {
 									const result = window.confirm('정말 이 레시피를 수정할까요?');
 									if (result) {
-										selectFile()
+										selectFile();
 									}
 								}}
 							>
@@ -173,7 +178,6 @@ const ArticleEdit = ({ match, history }) => {
 
 const Box = styled.div`
 	width: 70vw;
-	height: 80vh;
 	background-color: #fff;
 	padding: 60px;
 	box-sizing: border-box;
@@ -193,11 +197,10 @@ const BtnBox = styled.div`
 `;
 
 const Container = styled.div`
+	margin-top: 50px;
 	width: 100%;
-	height: calc(100vh - 150px);
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
 	align-items: center;
 `;
 

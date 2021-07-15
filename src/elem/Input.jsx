@@ -3,7 +3,16 @@ import styled from 'styled-components';
 import { Text } from '.';
 
 const Input = (props) => {
-	const { type, label, placeholder, multiLine, _onChange, _value,_onKeyPress } = props;
+	const {
+		hei,
+		type,
+		label,
+		placeholder,
+		multiLine,
+		_onChange,
+		_value,
+		_onKeyPress,
+	} = props;
 
 	if (multiLine) {
 		return (
@@ -23,6 +32,7 @@ const Input = (props) => {
 		<React.Fragment>
 			{label && <Text margin='20px 5px 5px 0'>{label}</Text>}
 			<NormalInput
+				hei={hei}
 				type={type}
 				placeholder={placeholder}
 				onChange={_onChange}
@@ -43,6 +53,7 @@ Input.defaultProps = {
 };
 
 const NormalInput = styled.input`
+	height: ${(props) => props.hei};
 	border: 1px solid #c4c4c4;
 	border-radius: 4px;
 	width: 100%;

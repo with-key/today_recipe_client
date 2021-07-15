@@ -6,6 +6,7 @@ import { dateConvert } from '../util';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
+	console.log(articles);
 	const isLogin = useSelector((store) => store.user.is_login);
 
 	return (
@@ -39,7 +40,7 @@ const List = ({ history }) => {
 					</Col>
 				</ListHeader>
 				{articles.map((item, idx) => (
-					<Row item={item} key={item.id} history={history}>
+					<Row item={item} history={history} key={item.id}>
 						<Col width='10%' centerY centerX>
 							{articles.length - idx}
 						</Col>

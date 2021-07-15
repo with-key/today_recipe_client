@@ -49,8 +49,8 @@ const ArticleWrite = ({ history }) => {
 			window.alert('이미지를 업로드해주세요');
 			return;
 		}
-		if(contents.title === '' || contents.content === ''){
-			window.alert("제목 및 내용을 모두 작성해주세요");
+		if (contents.title === '' || contents.content === '') {
+			window.alert('제목 및 내용을 모두 작성해주세요');
 			return;
 		}
 
@@ -88,31 +88,12 @@ const ArticleWrite = ({ history }) => {
 			<Template>
 				<Container>
 					<Box>
-						<Text fs='20px' mg='0 0 10px 0' fw='600'>
-							이미지 업로드
-						</Text>
-						<label style={{}} htmlFor='fileUpload'>
-							<Image
-								shape='rectangle'
-								src={
-									preview
-										? preview
-										: 'https://todayrecipe.s3.ap-northeast-2.amazonaws.com/defaultImage.png'
-								}
-							/>
-						</label>
-						<input
-							style={{ display: 'none' }}
-							type='file'
-							ref={fileInput}
-							onChange={filePreview}
-							id='fileUpload'
-						/>
 						<Grid>
 							<Text fs='28px' fw='600' mg='20px 0 10px 0'>
 								제목
 							</Text>
 							<Input
+								hei='50px;'
 								label='오늘의 레시피 제목을 작성해주세요!'
 								_onChange={(e) => {
 									setTitle(e.target.value);
@@ -129,6 +110,34 @@ const ArticleWrite = ({ history }) => {
 								_onChange={(e) => {
 									setContent(e.target.value);
 								}}
+							/>
+						</Grid>
+						<Grid
+							style={{
+								borderTop: '1px solid #ddd',
+								marginTop: '50px',
+								paddingTop: '30px',
+							}}
+						>
+							<Text fs='20px' fw='600' mg='20px 0 10px 0'>
+								이미지 업로드
+							</Text>
+							<label htmlFor='fileUpload'>
+								<Image
+									shape='rectangle'
+									src={
+										preview
+											? preview
+											: 'https://todayrecipe.s3.ap-northeast-2.amazonaws.com/defaultImage.png'
+									}
+								/>
+							</label>
+							<input
+								style={{ display: 'none' }}
+								type='file'
+								ref={fileInput}
+								onChange={filePreview}
+								id='fileUpload'
 							/>
 						</Grid>
 						<BtnBox>
@@ -149,11 +158,9 @@ const ArticleWrite = ({ history }) => {
 
 const Box = styled.div`
 	width: 70vw;
-	height: 90vh;
 	background-color: #fff;
 	padding: 60px;
 	box-sizing: border-box;
-	box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 	overflow: auto;
 `;
@@ -172,10 +179,8 @@ const BtnBox = styled.div`
 const Container = styled.div`
 	margin-top: 50px;
 	width: 100%;
-	height: calc(100vh - 150px);
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
 	align-items: center;
 `;
 

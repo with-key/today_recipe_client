@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Flex, Text, Button } from '../elem';
+import { Flex, Text, Button, UserIcon } from '../elem';
+import { dateConvert } from '../util';
 import { __delComment, __editComment } from '../modules/comment';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,16 +14,19 @@ const Comments = ({ comment, id }) => {
 
 	if (editMode) {
 		return (
-			<Container>
+			<Container kye={comment.id}>
 				<Main>
 					<Info>
 						<Flex between>
 							<Text fs='18px' fw='500' color='#333'>
-								{comment.commentAuthor}
+								<Flex center gap='10px'>
+									<UserIcon />
+									{comment.commentAuthor}
+								</Flex>
 							</Text>
 							<Flex>
 								<Text fs='18px' fw='500' color='gray'>
-									{comment.createdAt}
+									{dateConvert(comment.createdAt)}
 								</Text>
 							</Flex>
 						</Flex>
@@ -65,11 +69,14 @@ const Comments = ({ comment, id }) => {
 				<Info>
 					<Flex between>
 						<Text fs='18px' fw='500' color='#333'>
-							{comment.commentAuthor}
+							<Flex center gap='10px'>
+								<UserIcon />
+								{comment.commentAuthor}
+							</Flex>
 						</Text>
 						<Flex>
 							<Text fs='18px' fw='500' color='gray'>
-								{comment.createdAt}
+								{dateConvert(comment.createdAt)}
 							</Text>
 						</Flex>
 					</Flex>

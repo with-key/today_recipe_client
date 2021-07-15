@@ -46,6 +46,18 @@ const BtnBx = styled.button`
 			: `width: ${props.width}`};
 
 	${(props) =>
+		props.outline &&
+		css`
+			border: 2px solid #ff6b6b !important;
+			background-color: #fff;
+			color: #333;
+			transition: transform ease-in-out 200ms;
+			&:hover {
+				transform: scale(1.05);
+			}
+		`};
+
+	${(props) =>
 		props.primary &&
 		css`
 			background-color: #ff6b6b;
