@@ -7,19 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { articleActions } from '../modules/article';
 import { imageCreators } from '../modules/image';
 import Image from '../elem/Image';
-
 import Template from '../components/Template';
 import AWS from 'aws-sdk';
-// import jwtDecode from 'jwt-decode';
+import Auth from '../util/Auth';
 
-//
-
-const ArticleWrite = (props) => {
+const ArticleWrite = ({ history }) => {
 	const dispatch = useDispatch();
-
-	// const tokens = document.cookie.split('=')[1];
-	// console.log(jwtDecode(tokens));
-
+	const preview = useSelector((state) => state.image.preview);
 	const [title, setTitle] = React.useState('');
 	const [content, setContent] = React.useState('');
 
@@ -36,7 +30,6 @@ const ArticleWrite = (props) => {
 	});
 
 	const fileInput = React.useRef();
-	console.log(fileInput);
 
 	const filePreview = () => {
 		const reader = new FileReader();
@@ -48,13 +41,12 @@ const ArticleWrite = (props) => {
 		};
 	};
 
-	const preview = useSelector((state) => state.image.preview);
 	const selectFile = () => {
 		const date = new Date();
 		const file = fileInput.current.files[0];
 
-		if(!file){
-			window.alert("이미지를 업로드해주세요");
+		if (!file) {
+			window.alert('이미지를 업로드해주세요');
 			return;
 		}
 
@@ -65,7 +57,6 @@ const ArticleWrite = (props) => {
 				Body: file,
 			},
 		});
-
 
 		const promise = upload.promise();
 
@@ -89,6 +80,7 @@ const ArticleWrite = (props) => {
 
 	return (
 		<React.Fragment>
+			<Auth history={history} />
 			<Template>
 				<Container>
 					<Box>

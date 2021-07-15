@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // components
 import Home from '../page/Home';
@@ -22,6 +22,7 @@ export default function Router() {
 				<Route path='/signup' component={SignUp} exact />
 				<Route path='/add_article' component={ArticleWrite} exact />
 				<Route path='/myinfo' component={MyInfo} exact />
+				<Redirect from='*' to='/' />
 			</Switch>
 		</>
 	);

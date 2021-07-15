@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Router from './components/Router';
 import GlobalStyles from './components/GlobalStyles';
 import ScrollToTop from './util/ScrollToTop';
@@ -9,8 +9,9 @@ import { useDispatch } from 'react-redux';
 function App() {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(userCreators.loginCheckDB())
-	},[])
+		dispatch(userCreators.loginCheckDB());
+	}, []);
+
 	return (
 		<>
 			<ScrollToTop></ScrollToTop>

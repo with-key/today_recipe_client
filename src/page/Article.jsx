@@ -22,10 +22,9 @@ import { Flex, Text, Button } from '../elem';
 const Article = ({ history, match }) => {
 	const dispatch = useDispatch();
 	const article = useSelector((store) => store.article.article);
-	console.log(article);
 	const comments = useSelector((store) => store.comment.comments);
+	const isLogin = useSelector((store) => store.user.is_login);
 	const username = useSelector((store) => store.user.user);
-	// console.log(username.id);
 
 	const {
 		params: { id },
@@ -51,30 +50,34 @@ const Article = ({ history, match }) => {
 								{article.title}
 							</Text>
 							<Flex gap='10px'>
-								<>
-									<Button
-										large
-										primary
-										_onClick={() => {
-											history.push(`/article/${id}/edit`);
-										}}
-									>
-										수정
-									</Button>
-									<Button
-										large
-										primary
-										_onClick={() => {
-											const result =
-												window.confirm('정말 이 레시피를 삭제할까요?');
-											if (result) {
-												dispatch(__delArticle(id));
-											}
-										}}
-									>
-										삭제
-									</Button>
-								</>
+								{isLogin && username.id === article.username ? (
+									<>
+										<Button
+											large
+											primary
+											_onClick={() => {
+												history.push(`/article/${id}/edit`);
+											}}
+										>
+											수정
+										</Button>
+										<Button
+											large
+											primary
+											_onClick={() => {
+												const result =
+													window.confirm('정말 이 레시피를 삭제할까요?');
+												if (result) {
+													dispatch(__delArticle(id));
+												}
+											}}
+										>
+											삭제
+										</Button>
+									</>
+								) : (
+									''
+								)}
 								<Button
 									large
 									primary
@@ -120,9 +123,9 @@ const Article = ({ history, match }) => {
 								{article.content}
 							</Text>
 						</Desc>
-						<Flex right mg='10px 0'>
+						{/* <Flex right mg='10px 0'>
 							<Button primary>좋아요 {article.isLikeCnt}</Button>
-						</Flex>
+						</Flex> */}
 					</Main>
 					{comments.map((comment) => (
 						<Comments comment={comment} key={comment.id} id={id} />

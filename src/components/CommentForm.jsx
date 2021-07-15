@@ -6,16 +6,18 @@ import { __addComment } from '../modules/comment';
 
 const CommentForm = ({ id }) => {
 	const dispatch = useDispatch();
-	const [content, setContent] = useState();
+	const [content, setContent] = useState('');
 
 	return (
 		<Container
 			onSubmit={(e) => {
 				e.preventDefault();
 				dispatch(__addComment(id, content));
+				setContent('');
 			}}
 		>
 			<CommentInput
+				value={content}
 				onChange={(e) => {
 					setContent(e.target.value);
 				}}

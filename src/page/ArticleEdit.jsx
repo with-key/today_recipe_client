@@ -5,6 +5,7 @@ import { Text, Input, Button } from '../elem';
 import Template from '../components/Template';
 import { __editArticle } from '../modules/article';
 import { useDispatch } from 'react-redux';
+import Auth from '../util/Auth';
 
 const ArticleEdit = ({ match, history }) => {
 	const [contents, setContents] = useState({
@@ -34,6 +35,7 @@ const ArticleEdit = ({ match, history }) => {
 
 	return (
 		<React.Fragment>
+			<Auth history={history} />
 			<Template>
 				<Container>
 					<Box>

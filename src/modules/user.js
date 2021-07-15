@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { deleteCookie, setCookie } from '../shared/Cookie';
 import { apis } from '../shared/api';
-import axios from 'axios';
 
 // action
 const LOGIN = 'user/LOGIN';
@@ -45,8 +44,7 @@ const setLoginDB = (id, pwd) => {
 				setCookie('token', res.data[1].token, 7);
 				localStorage.setItem('username', res.data[0].username);
 				dispatch(setLogin({ id: id }));
-				history.push('/');
-				// window.location.reload();
+				history.replace('/');
 			})
 			.catch((err) => {
 				console.log(err);
@@ -64,11 +62,11 @@ const logOutDB = () => {
 };
 
 const loginCheckDB = () => {
-	return function(dispatch, getState, {history}){
-		const userId = localStorage.getItem('username')
+	return function (dispatch, getState, { history }) {
+		const userId = localStorage.getItem('username');
 		const tokenCheck = document.cookie;
-		if(tokenCheck) {
-			dispatch(setLogin({id: userId}))
+		if (tokenCheck) {
+			dispatch(setLogin({ id: userId }));
 		} else {
 			dispatch(logOut());
 		}

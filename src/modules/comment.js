@@ -85,11 +85,16 @@ export default handleActions(
 				),
 			};
 		},
-		[EDIT]: (state, action) =>
-			produce(state, (draft) => {
-				console.log(action);
-				// draft.comments[]
-			}),
+		[EDIT]: (state, action) => {
+			console.log(state);
+			console.log(action);
+			return {
+				...state,
+				comments: state.comments
+					.filter((comment) => comment.id !== action.payload.coId)
+					.concat(action.payload.newContent),
+			};
+		},
 	},
 	initialState,
 );
