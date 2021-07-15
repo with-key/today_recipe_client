@@ -16,6 +16,7 @@ api.interceptors.request.use(
 	},
 );
 
+
 export const apis = {
 	// article
 	add: (contents) => api.post('/api/articles', contents),
@@ -42,4 +43,7 @@ export const apis = {
 			password: pw,
 			repassword: pwcheck,
 		}),
+	userInfo: () => api.get(`/myinfo`),
+	userPassword: (pw) => api.post(`/myinfo`, pw),
+	userNewPassword: (pw) => api.put(`/myinfo`, pw),
 };

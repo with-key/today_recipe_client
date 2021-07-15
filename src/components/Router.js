@@ -9,6 +9,7 @@ import SignUp from '../page/SignUp';
 import Article from '../page/Article';
 import ArticleWrite from '../page/ArticleWrite';
 import ArticleEdit from '../page/ArticleEdit';
+import MyInfo from '../page/MyInfo';
 
 export default function Router() {
 	return (
@@ -20,6 +21,7 @@ export default function Router() {
 				<Route path='/login' component={Login} exact />
 				<Route path='/signup' component={SignUp} exact />
 				<Route path='/add_article' component={ArticleWrite} exact />
+				<Route path='/myinfo' component={MyInfo} exact />
 			</Switch>
 		</>
 	);
