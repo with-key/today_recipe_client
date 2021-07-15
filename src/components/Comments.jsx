@@ -82,7 +82,7 @@ const Comments = ({ comment, id }) => {
 					</Flex>
 				</Info>
 				<Desc>
-					<Text fs='16px' color='#333' lh='150%'>
+					<Text fs='16px' color='#333' lh='150%' ws='pre-line'>
 						{comment.content}
 					</Text>
 				</Desc>
