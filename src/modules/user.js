@@ -6,14 +6,18 @@ import { apis } from '../shared/api';
 // action
 const LOGIN = 'user/LOGIN';
 const LOGOUT = 'user/LOGOUT';
+const USERINFO = 'user/USERINFO';
 
 // action creator
 const setLogin = createAction(LOGIN, (user) => ({ user }));
 const logOut = createAction(LOGOUT, (user) => ({ user }));
+const userInfo = createAction(LOGIN,(user) => ({user}));
 
 // initialState
 const initialState = {
 	user: null,
+	username: null,
+	email: null,
 	is_login: false,
 };
 
@@ -69,6 +73,18 @@ const loginCheckDB = () => {
 	};
 };
 
+const userInfoDB = () => {
+	return function(dispatch, getState, {history}){
+		apis
+		.userInfo()
+		.then((res)=>{
+			dispatch(userInfo({username:res.data.username, email:res.data.email}))
+		}).catch((err) => {
+			console.log(err)
+		})
+	}
+}
+
 // reducer
 export default handleActions(
 	{
@@ -82,6 +98,10 @@ export default handleActions(
 				draft.user = null;
 				draft.is_login = false;
 			}),
+		[USERINFO]: (state, action) => produce(state, (draft) => {
+			draft.username = action.payload.username;
+			draft.email = action.payload.email;
+		})
 	},
 	initialState,
 );
@@ -91,6 +111,7 @@ const userCreators = {
 	registerDB,
 	logOutDB,
 	loginCheckDB,
+	userInfoDB,
 };
 
 export { userCreators };

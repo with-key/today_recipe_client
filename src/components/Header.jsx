@@ -19,7 +19,9 @@ const Header = (props) => {
 			<Container>
 				<Logo history={history} />
 				<Flex gap='10px;'>
-					<Button primary>내 정보</Button>
+					<Button _onClick={() => {
+						history.push('/myinfo')
+					}}primary>내 정보</Button>
 					<Button
 						primary
 						_onClick={() => {
