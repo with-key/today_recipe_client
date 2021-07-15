@@ -48,7 +48,12 @@ const ArticleEdit = ({ match, history }) => {
 		const file = fileInput.current.files[0];
 
 		if (!file) {
-			window.alert('이미지를 업로드해주세요');
+			dispatch(imageCreators.imageUpload(contents.imageUrl));
+			const content = {
+				...contents,
+				imageUrl: contents.imageUrl
+			}
+			dispatch(__editArticle(id,content));
 			return;
 		}
 
