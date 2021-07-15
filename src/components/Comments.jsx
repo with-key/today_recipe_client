@@ -44,6 +44,7 @@ const Comments = ({ comment, id }) => {
 							small
 							_onClick={() => {
 								setEditMode(!editMode);
+								setNewContent(comment.content);
 							}}
 						>
 							취소

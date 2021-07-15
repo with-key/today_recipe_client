@@ -56,9 +56,9 @@ const List = ({ history }) => {
 					</Row>
 				))}
 				<Pagintion>
-					<Button large primary>
+					{/* <Button large primary>
 						더보기
-					</Button>
+					</Button> */}
 				</Pagintion>
 			</ListWrap>
 		</Container>
@@ -118,8 +118,7 @@ const ListHeader = styled.div`
 `;
 
 const Pagintion = styled.div`
-	margin-top: 100px;
-	padding-bottom: 50px;
+	/* padding-bottom: 20px; */
 	height: 100px;
 	width: 100%;
 	display: flex;

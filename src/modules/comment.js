@@ -85,14 +85,19 @@ export default handleActions(
 				),
 			};
 		},
+
 		[EDIT]: (state, action) => {
-			console.log(state);
-			console.log(action);
+			// 배열에서 특정값을 찾아서 불변성 유지하면서 수정해주기
+			const data = action.payload.newContent;
 			return {
 				...state,
-				comments: state.comments
-					.filter((comment) => comment.id !== action.payload.coId)
-					.concat(action.payload.newContent),
+				comments: state.comments.map((comment, idx) => {
+					if (comment.id === data.id) {
+						return (state.comments[idx] = data);
+					} else {
+						return comment;
+					}
+				}),
 			};
 		},
 	},

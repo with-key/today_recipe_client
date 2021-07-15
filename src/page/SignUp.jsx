@@ -1,18 +1,18 @@
-import React from 'react';
-
-import { useDispatch } from 'react-redux';
-import { userCreators } from '../modules/user';
-import { idCheck, emailCheck } from '../shared/regExp';
-
-import { history } from '../modules/configStore';
-
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { userCreators } from '../modules/user';
+
+// compo & elem & shared
+import { idCheck, emailCheck } from '../shared/regExp';
 import Template from '../components/Template';
 import { Text, Button, Input } from '../elem/index';
 
-const SignUp = (props) => {
+const SignUp = ({ history }) => {
+	const isLogin = useSelector((store) => store.user.is_login);
 	const dispatch = useDispatch();
-
 	const [id, setId] = React.useState('');
 	const [email, setEmail] = React.useState('');
 	const [pw, setPw] = React.useState('');
@@ -20,6 +20,10 @@ const SignUp = (props) => {
 
 	const password = React.useRef();
 	const passwordCheck = React.useRef();
+
+	useEffect(() => {
+		if (isLogin) history.push('/');
+	});
 
 	if (pw && pwcheck && pw === pwcheck) {
 		password.current.innerText = '✔️';

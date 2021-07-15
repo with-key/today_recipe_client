@@ -11,7 +11,7 @@ const USERINFO = 'user/USERINFO';
 // action creator
 const setLogin = createAction(LOGIN, (user) => ({ user }));
 const logOut = createAction(LOGOUT, (user) => ({ user }));
-const userInfo = createAction(LOGIN,(user) => ({user}));
+const userInfo = createAction(LOGIN, (user) => ({ user }));
 
 // initialState
 const initialState = {
@@ -48,6 +48,7 @@ const setLoginDB = (id, pwd) => {
 			})
 			.catch((err) => {
 				console.log(err);
+				window.alert('없는 회원정보 입니다! 회원가입을 해주세요!');
 			});
 	};
 };
@@ -74,16 +75,17 @@ const loginCheckDB = () => {
 };
 
 const userInfoDB = () => {
-	return function(dispatch, getState, {history}){
+	return function (dispatch, getState, { history }) {
 		apis
-		.userInfo()
-		.then((res)=>{
-			dispatch(userInfo({id:res.data.username, email:res.data.email}))
-		}).catch((err) => {
-			console.log(err)
-		})
-	}
-}
+			.userInfo()
+			.then((res) => {
+				dispatch(userInfo({ id: res.data.username, email: res.data.email }));
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+};
 
 // reducer
 export default handleActions(
@@ -98,10 +100,11 @@ export default handleActions(
 				draft.user = null;
 				draft.is_login = false;
 			}),
-		[USERINFO]: (state, action) => produce(state, (draft) => {
-			draft.user = action.payload.user;
-			draft.email = action.payload.email;
-		})
+		[USERINFO]: (state, action) =>
+			produce(state, (draft) => {
+				draft.user = action.payload.user;
+				draft.email = action.payload.email;
+			}),
 	},
 	initialState,
 );
