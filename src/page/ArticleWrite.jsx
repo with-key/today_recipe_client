@@ -49,6 +49,10 @@ const ArticleWrite = ({ history }) => {
 			window.alert('이미지를 업로드해주세요');
 			return;
 		}
+		if(contents.title === '' || contents.content === ''){
+			window.alert("제목 및 내용을 모두 작성해주세요");
+			return;
+		}
 
 		const upload = new AWS.S3.ManagedUpload({
 			params: {
