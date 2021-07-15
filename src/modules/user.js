@@ -78,7 +78,7 @@ const userInfoDB = () => {
 		apis
 		.userInfo()
 		.then((res)=>{
-			dispatch(userInfo({username:res.data.username, email:res.data.email}))
+			dispatch(userInfo({id:res.data.username, email:res.data.email}))
 		}).catch((err) => {
 			console.log(err)
 		})
@@ -99,7 +99,7 @@ export default handleActions(
 				draft.is_login = false;
 			}),
 		[USERINFO]: (state, action) => produce(state, (draft) => {
-			draft.username = action.payload.username;
+			draft.user = action.payload.user;
 			draft.email = action.payload.email;
 		})
 	},

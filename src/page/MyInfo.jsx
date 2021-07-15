@@ -64,7 +64,7 @@ const MyInfo = () => {
                 <Container>
                     <TextBox>
                         <Text color="#ff7776" mg="0 30px 0 0" fs="20px" fw="600">아이디</Text>
-                        <Text fs="14px" fw="400">{users.username}</Text>
+                        <Text fs="14px" fw="400">{users.id}</Text>
                     </TextBox>
                     <TextBox>
                         <Text color="#ff7776" mg="0 30px 0 0" fs="20px" fw="600">이메일</Text>
