@@ -31,14 +31,4 @@
 
 ### Stack & Library
 
-**BackEnd** : Java spring boot
-**BackEnd** : Java spring boot
-**BackEnd** : Java spring boot
-
-**FrontEnd**
-
-- React.js
-- Package
-  - redux
-    - rudx-actions, redux-thunk
-  - router
+java spring boot, react.js, mySql, jwt, swagger
