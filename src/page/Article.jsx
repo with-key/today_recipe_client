@@ -117,7 +117,7 @@ const Article = ({ history, match }) => {
 						<Comments comment={comment} key={comment.id} id={id} />
 					))}
 				</Contents>
-				<CommentForm id={id} />
+				{isLogin && <CommentForm id={id} />}
 				<List history={history} />
 			</Container>
 		</Template>
