@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Row, Button, Text } from '../elem';
+import { dateConvert } from '../util';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
@@ -33,13 +34,7 @@ const List = ({ history }) => {
 					<Col width='20%' centerY centerX>
 						작성자
 					</Col>
-					<Col width='10%' centerY centerX>
-						조회수
-					</Col>
-					<Col width='10%' centerY centerX>
-						좋아요
-					</Col>
-					<Col width='10%' centerY centerX>
+					<Col width='20%' centerY centerX>
 						작성시간
 					</Col>
 				</ListHeader>
@@ -54,21 +49,15 @@ const List = ({ history }) => {
 						<Col width='20%' centerY centerX>
 							<Text mg='10px 0'>{item.username}</Text>
 						</Col>
-						<Col width='10%' centerY centerX>
-							{/* 조회수 */} 10
-						</Col>
-						<Col width='10%' centerY centerX>
-							{/* 좋아요 수 */} 12
-						</Col>
-						<Col width='10%' centerY>
-							{item.createdAt}
+						<Col width='20%' centerY centerX>
+							{dateConvert(item.createdAt)}
 						</Col>
 					</Row>
 				))}
 				<Pagintion>
-					{/* <Button large primary>
+					<Button large primary>
 						더보기
-					</Button> */}
+					</Button>
 				</Pagintion>
 			</ListWrap>
 		</Container>

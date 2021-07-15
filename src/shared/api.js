@@ -8,14 +8,11 @@ const api = axios.create({
 	},
 });
 
-api.interceptors.request.use(
-	function(config){
-		const accessToken = document.cookie.split('=')[1];
-		config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
-		return config;
-	},
-);
-
+api.interceptors.request.use(function (config) {
+	const accessToken = document.cookie.split('=')[1];
+	config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
+	return config;
+});
 
 export const apis = {
 	// article

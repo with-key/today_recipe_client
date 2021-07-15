@@ -18,6 +18,7 @@ import CommentForm from '../components/CommentForm';
 
 // elem
 import { Flex, Text, Button } from '../elem';
+import { dateConvert } from '../util';
 
 const Article = ({ history, match }) => {
 	const dispatch = useDispatch();
@@ -89,20 +90,6 @@ const Article = ({ history, match }) => {
 								</Button>
 							</Flex>
 						</Flex>
-						<Flex gap='10px'>
-							<Text color='#333' fs='16px'>
-								조회 10
-								{/* {article.views} */}
-							</Text>
-							<Text color='#333' fs='16px'>
-								댓글 10
-								{/* {article.commentCnt} */}
-							</Text>
-							<Text color='#333' fs='16px'>
-								좋아요 10
-								{/* {article.isLikeCnt} */}
-							</Text>
-						</Flex>
 					</Title>
 					<Main>
 						<Info>
@@ -111,7 +98,7 @@ const Article = ({ history, match }) => {
 									{article.username}
 								</Text>
 								<Text fs='18px' fw='500' color='gray'>
-									{article.createdAt}
+									{dateConvert(article.createdAt)}
 								</Text>
 							</Flex>
 						</Info>
@@ -123,9 +110,6 @@ const Article = ({ history, match }) => {
 								{article.content}
 							</Text>
 						</Desc>
-						{/* <Flex right mg='10px 0'>
-							<Button primary>좋아요 {article.isLikeCnt}</Button>
-						</Flex> */}
 					</Main>
 					{comments.map((comment) => (
 						<Comments comment={comment} key={comment.id} id={id} />
