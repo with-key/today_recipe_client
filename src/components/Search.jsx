@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
+// redux
 import { useDispatch } from 'react-redux';
 import { searchArticleDB } from '../modules/article';
 
@@ -23,7 +25,7 @@ const Search = () => {
 					setTerm(e.target.value);
 				}}
 				onKeyPress={(e) => {
-					if(e.key === 'Enter'){
+					if (e.key === 'Enter') {
 						dispatch(searchArticleDB(term));
 					}
 				}}

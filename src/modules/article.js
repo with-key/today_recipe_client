@@ -8,7 +8,6 @@ const LOAD = 'article/LOAD';
 const LOAD_ID = 'article/LOAD_Id';
 const ADD_ARTICLE = 'article/ADD_ARTICLE';
 const EDIT = 'article/EDIT';
-const DELETE = 'article/DELETE';
 const SEARCH = 'article/SEARCH';
 
 // action creator
@@ -37,7 +36,7 @@ export const __loadAarticles =
 			dispatch(loadAarticles(data));
 			dispatch(imageCreators.setPreview(null));
 		} catch (e) {
-			console.log(`아티클 조회 오류 발생!${e}`);
+			// console.log(`아티클 조회 오류 발생!${e}`);
 		}
 	};
 
@@ -46,14 +45,12 @@ export const addArticleDB = (content) => {
 		apis
 			.add(content)
 			.then(() => {
-				console.log(content);
 				dispatch(addArticle(content));
 				history.push('/');
 				dispatch(imageCreators.setPreview(null));
 			})
 			.catch((err) => {
 				window.alert('로그인한 회원만 작성할 수 있습니다!');
-				console.log(err);
 			});
 	};
 };
@@ -78,20 +75,19 @@ export const __loadAarticleGetId =
 			const { data } = await apis.article(id);
 			dispatch(loadArticleGetId(data));
 		} catch (e) {
-			console.log(`개별 아티클 조회 오류 발생!${e}`);
+			// console.log(`개별 아티클 조회 오류 발생!${e}`);
 		}
 	};
 
 export const __editArticle =
 	(id, newArticle) =>
 	async (dispatch, getState, { history }) => {
-		console.log(id, newArticle);
 		try {
 			await apis.edit(id, newArticle);
 			dispatch(editArticle(id, newArticle));
 			history.goBack();
 		} catch (e) {
-			console.log(e);
+			// console.log(e);
 		}
 	};
 
@@ -108,7 +104,6 @@ export const __delArticle =
 export default handleActions(
 	{
 		[LOAD]: (state, action) => {
-			console.log(action);
 			return {
 				...state,
 				list: action.payload.articles,

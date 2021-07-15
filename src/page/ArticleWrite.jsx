@@ -1,14 +1,16 @@
 import React from 'react';
-
 import styled from 'styled-components';
-import { Text, Input, Button } from '../elem';
+import AWS from 'aws-sdk';
 
+// redux & api
 import { useDispatch, useSelector } from 'react-redux';
 import { articleActions } from '../modules/article';
 import { imageCreators } from '../modules/image';
+
+// compo & elem & share & util
+import { Text, Input, Button } from '../elem';
 import Image from '../elem/Image';
 import Template from '../components/Template';
-import AWS from 'aws-sdk';
 import Auth from '../util/Auth';
 
 const ArticleWrite = ({ history }) => {

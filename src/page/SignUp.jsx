@@ -27,7 +27,7 @@ const SignUp = ({ history }) => {
 
 	if (pw && pwcheck && pw === pwcheck) {
 		password.current.innerText = '✔️';
-		passwordCheck.current.innerText = '✔️';
+		passwordCheck.current.innerText = ' ✔️';
 	} else if (pw !== pwcheck) {
 		password.current.innerText = '❌';
 		passwordCheck.current.innerText = '❌';

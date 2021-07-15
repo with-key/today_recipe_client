@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Button, Flex } from '../elem';
+
+// redux
+import { useDispatch } from 'react-redux';
 import { __addComment } from '../modules/comment';
+
+// compo & elem & share & util
+import { Button, Flex } from '../elem';
 
 const CommentForm = ({ id }) => {
 	const dispatch = useDispatch();

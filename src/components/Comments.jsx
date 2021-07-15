@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Flex, Text, Button, UserIcon } from '../elem';
-import { dateConvert } from '../util';
+
+// redux
 import { __delComment, __editComment } from '../modules/comment';
 import { useDispatch, useSelector } from 'react-redux';
+
+// compo & elem & share & util
+import { Flex, Text, Button, UserIcon } from '../elem';
+import { dateConvert } from '../util';
 
 const Comments = ({ comment, id }) => {
 	const dispatch = useDispatch();

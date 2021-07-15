@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { apis } from '../shared/api';
 import styled from 'styled-components';
-import { Text, Input, Button, Image } from '../elem';
-import Template from '../components/Template';
+import AWS from 'aws-sdk';
+
+// redux & api
+import { apis } from '../shared/api';
 import { __editArticle } from '../modules/article';
 import { useDispatch, useSelector } from 'react-redux';
-import Auth from '../util/Auth';
 import { imageCreators } from '../modules/image';
 
-import AWS from 'aws-sdk';
+// compo & elem & share & util
+import Auth from '../util/Auth';
+import Template from '../components/Template';
+import { Text, Input, Button, Image, Flex } from '../elem';
 
 const ArticleEdit = ({ match, history }) => {
 	const preview = useSelector((state) => state.image.preview);
@@ -51,9 +54,9 @@ const ArticleEdit = ({ match, history }) => {
 			dispatch(imageCreators.imageUpload(contents.imageUrl));
 			const content = {
 				...contents,
-				imageUrl: contents.imageUrl
-			}
-			dispatch(__editArticle(id,content));
+				imageUrl: contents.imageUrl,
+			};
+			dispatch(__editArticle(id, content));
 			return;
 		}
 
@@ -89,7 +92,7 @@ const ArticleEdit = ({ match, history }) => {
 				} = await apis.article(id);
 				setContents({ title, content, imageUrl });
 			} catch (e) {
-				console.log(`아티클 불러오기 오류 : ${e}`);
+				// console.log(`아티클 불러오기 오류 : ${e}`);
 			}
 		};
 		fetchArticle();
@@ -151,7 +154,7 @@ const ArticleEdit = ({ match, history }) => {
 								id='fileUpload'
 							/>
 						</Grid>
-						<BtnBox>
+						<Flex gap='10px' center>
 							<Button
 								primary
 								large
@@ -173,7 +176,7 @@ const ArticleEdit = ({ match, history }) => {
 							>
 								수정완료
 							</Button>
-						</BtnBox>
+						</Flex>
 					</Box>
 				</Container>
 			</Template>

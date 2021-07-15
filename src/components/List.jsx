@@ -1,12 +1,15 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+
+// redux
 import { useSelector } from 'react-redux';
+
+// compo & elem & share & util
 import { Row, Button, Text } from '../elem';
 import { dateConvert } from '../util';
 
 const List = ({ history }) => {
 	const articles = useSelector((store) => store.article.list);
-	console.log(articles);
 	const isLogin = useSelector((store) => store.user.is_login);
 
 	return (

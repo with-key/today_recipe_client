@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+
+// redux
 import { useDispatch } from 'react-redux';
 import { __loadAarticles } from '../modules/article';
 
+// compo & elem & share & util
 import Template from '../components/Template';
 import Search from '../components/Search';
 import List from '../components/List';

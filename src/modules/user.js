@@ -31,7 +31,6 @@ const registerDB = (id, email, pw, pwcheck) => {
 			})
 			.catch((err) => {
 				window.alert('이미 존재하는 아이디 또는 이메일입니다.');
-				console.log(err);
 			});
 	};
 };
@@ -47,7 +46,6 @@ const setLoginDB = (id, pwd) => {
 				history.replace('/');
 			})
 			.catch((err) => {
-				console.log(err);
 				window.alert('없는 회원정보 입니다! 회원가입을 해주세요!');
 			});
 	};
@@ -82,7 +80,7 @@ const userInfoDB = () => {
 				dispatch(userInfo({ id: res.data.username, email: res.data.email }));
 			})
 			.catch((err) => {
-				console.log(err);
+				return err;
 			});
 	};
 };

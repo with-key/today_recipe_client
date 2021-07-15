@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// import { useSelector } from 'react-redux';
+// redux
 import { history } from '../modules/configStore';
-
 import { userCreators } from '../modules/user';
 import { useDispatch } from 'react-redux';
 
-// elem
+// compo & elem & share & util
 import { Logo, Button, Flex } from '../elem';
 
 const Header = (props) => {
@@ -19,9 +18,14 @@ const Header = (props) => {
 			<Container>
 				<Logo history={history} />
 				<Flex gap='10px;'>
-					<Button _onClick={() => {
-						history.push('/myinfo')
-					}}primary>내 정보</Button>
+					<Button
+						_onClick={() => {
+							history.push('/myinfo');
+						}}
+						primary
+					>
+						내 정보
+					</Button>
 					<Button
 						primary
 						_onClick={() => {

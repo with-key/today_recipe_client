@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+
+// compo & elem & share & util
 import { Flex, Text, Git, Velog } from '../elem';
 
 const Footer = () => {
@@ -78,8 +80,8 @@ const Footer = () => {
 				</InnerBox>
 			</OuterBox>
 			<Flex right gap='10px'>
-				<div>Copyright 2021 &copy; 오늘의레피시</div>
-				<div>v 1.0.2</div>
+				<div>Copyright 2021 &copy; 오늘의레시피</div>
+				<div>v 1.0.3</div>
 			</Flex>
 		</Container>
 	);

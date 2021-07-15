@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
+// redux
 import { useDispatch } from 'react-redux';
 import { userCreators } from '../modules/user';
+import { useSelector } from 'react-redux';
 
-// import { history } from '../modules/configStore';
-
-import styled from 'styled-components';
+// compo & elem & share & util
 import { Button, Text, Input } from '../elem/index';
 import Template from '../components/Template';
-import { useSelector } from 'react-redux';
 
 const Login = ({ history }) => {
 	const isLogin = useSelector((store) => store.user.is_login);
-	// console.log(isLogin);
 	const dispatch = useDispatch();
 	const [id, setId] = useState('');
 	const [pw, setPw] = useState('');

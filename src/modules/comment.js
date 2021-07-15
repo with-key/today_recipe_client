@@ -1,5 +1,4 @@
 import { createAction, handleActions } from 'redux-actions';
-import produce from 'immer';
 import { apis } from '../shared/api';
 
 // action
@@ -26,9 +25,7 @@ const initialState = {
 // Thunk function
 export const __editComment =
 	(id, coId, newContent, setEditMode) => async (dispatch) => {
-		console.log(id, coId, newContent);
 		const { data } = await apis.editComment(id, coId, newContent);
-		console.log(data);
 		dispatch(editComment(coId, data));
 		setEditMode(false);
 	};
@@ -43,9 +40,7 @@ export const __addComment =
 	(id, content) =>
 	async (dispatch, getState, { history }) => {
 		try {
-			console.log(id, content);
 			const { data } = await apis.addComment(id, content);
-			console.log(data);
 			dispatch(addComment(data));
 		} catch (e) {}
 	};
@@ -57,7 +52,7 @@ export const __getComments =
 			const { data } = await apis.comments(id);
 			dispatch(getComments(data));
 		} catch (e) {
-			console.log(`코멘트 불러오기 실패! ${e}`);
+			// console.log(`코멘트 불러오기 실패! ${e}`);
 		}
 	};
 

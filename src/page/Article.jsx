@@ -10,13 +10,11 @@ import {
 	__delArticle,
 } from '../modules/article';
 
-// compo
+// compo & elem & share & util
 import Template from '../components/Template';
 import List from '../components/List';
 import Comments from '../components/Comments';
 import CommentForm from '../components/CommentForm';
-
-// elem
 import { Flex, Text, Button, UserIcon } from '../elem';
 import { dateConvert } from '../util';
 
